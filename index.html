@@ -310,6 +310,31 @@
             .hybrid-operator { transform: rotate(90deg); padding: 8px 0; }
             .constraint-card { flex-direction: column; text-align: center; }
             .constraint-icon { margin: 0 auto; }
+        }
+
+        /* Slide 2 Dilemma Layout - Desktop Default */
+        .slide-2-dilemma {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .slide { padding: 32px 24px; }
+            .slide-counter { top: 16px; right: 16px; font-size: 0.75rem; padding: 6px 12px; }
+            .nav-sidebar { display: none; }
+            .display-large { font-size: 2rem; }
+            .display-small { font-size: 1.75rem; }
+            .big-number { font-size: 3rem; }
+            .big-stat { font-size: 2.5rem; }
+            .stats-row { gap: 24px; }
+            .stat-value { font-size: 2rem; }
+            .flow-horizontal { flex-direction: column; }
+            .flow-arrow { transform: rotate(90deg); }
+            .hybrid-grid { grid-template-columns: 1fr; }
+            .hybrid-operator { transform: rotate(90deg); padding: 8px 0; }
+            .constraint-card { flex-direction: column; text-align: center; }
+            .constraint-icon { margin: 0 auto; }
             .slide-2-dilemma { grid-template-columns: 1fr; gap: 16px; }
             .dilemma-divider { padding: 16px 0; order: 2; }
             .slide-2-icon { font-size: 36px !important; }
@@ -394,7 +419,7 @@
                 La vraie question est : <strong style="color: var(--md-on-surface);">comment générer des revenus sans tuer la croissance de notre réseau ?</strong>
             </p>
 
-            <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: center;" class="slide-2-dilemma">
+            <div class="slide-2-dilemma" style="align-items: center;">
                 <div class="md-card md-card-elevated slide-2-card" style="padding: 28px; text-align: center; border: 2px solid var(--md-error);">
                     <span class="material-symbols-outlined slide-2-icon" style="font-size: 44px; color: var(--md-error); margin-bottom: 16px; display: block;">block</span>
                     <h3 class="title-medium" style="color: var(--md-error); margin-bottom: 10px;">Facturer trop tôt</h3>
