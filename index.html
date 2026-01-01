@@ -310,6 +310,8 @@
             .hybrid-operator { transform: rotate(90deg); padding: 8px 0; }
             .constraint-card { flex-direction: column; text-align: center; }
             .constraint-icon { margin: 0 auto; }
+            .slide-2-dilemma { grid-template-columns: 1fr; gap: 16px; }
+            .dilemma-divider { padding: 16px 0; order: 2; }
         }
         @media (max-width: 480px) {
             .slide { padding: 20px 16px; }
@@ -330,6 +332,9 @@
             .component-value { font-size: 1.125rem; }
             .md-card { padding: 16px; }
             .card-grid { gap: 8px; }
+            .slide-2-dilemma { grid-template-columns: 1fr; gap: 12px; }
+            .dilemma-divider { display: none; }
+            .md-card-elevated { padding: 20px !important; }
         }
 
         /* Animations */
@@ -383,14 +388,14 @@
                 La vraie question est : <strong style="color: var(--md-on-surface);">comment générer des revenus sans tuer la croissance de notre réseau ?</strong>
             </p>
 
-            <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: center;">
+            <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: center;" class="slide-2-dilemma">
                 <div class="md-card md-card-elevated" style="padding: 28px; text-align: center; border: 2px solid var(--md-error);">
                     <span class="material-symbols-outlined" style="font-size: 44px; color: var(--md-error); margin-bottom: 16px;">block</span>
                     <h3 class="title-medium" style="color: var(--md-error); margin-bottom: 10px;">Facturer trop tôt</h3>
                     <p class="body-medium" style="color: var(--md-on-surface-variant);">Tue l'adoption → Réseau vide → Service inutile</p>
                 </div>
 
-                <div style="text-align: center;">
+                <div style="text-align: center;" class="dilemma-divider">
                     <span class="material-symbols-outlined" style="font-size: 36px; color: var(--md-outline);">compare_arrows</span>
                     <p class="label-medium" style="color: var(--md-outline); margin-top: 8px;">Le dilemme</p>
                 </div>
