@@ -312,6 +312,8 @@
             .constraint-icon { margin: 0 auto; }
             .slide-2-dilemma { grid-template-columns: 1fr; gap: 16px; }
             .dilemma-divider { padding: 16px 0; order: 2; }
+            .slide-2-icon { font-size: 36px !important; }
+            .slide-2-card { padding: 20px !important; }
         }
         @media (max-width: 480px) {
             .slide { padding: 20px 16px; }
@@ -334,7 +336,11 @@
             .card-grid { gap: 8px; }
             .slide-2-dilemma { grid-template-columns: 1fr; gap: 12px; }
             .dilemma-divider { display: none; }
-            .md-card-elevated { padding: 20px !important; }
+            .md-card-elevated { padding: 16px !important; }
+            .slide-2-icon { font-size: 32px !important; }
+            .slide-2-card { padding: 16px !important; }
+            .title-medium { font-size: 0.95rem; }
+            .body-medium { font-size: 0.8125rem; }
         }
 
         /* Animations */
@@ -389,8 +395,8 @@
             </p>
 
             <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: center;" class="slide-2-dilemma">
-                <div class="md-card md-card-elevated" style="padding: 28px; text-align: center; border: 2px solid var(--md-error);">
-                    <span class="material-symbols-outlined" style="font-size: 44px; color: var(--md-error); margin-bottom: 16px;">block</span>
+                <div class="md-card md-card-elevated slide-2-card" style="padding: 28px; text-align: center; border: 2px solid var(--md-error);">
+                    <span class="material-symbols-outlined slide-2-icon" style="font-size: 44px; color: var(--md-error); margin-bottom: 16px; display: block;">block</span>
                     <h3 class="title-medium" style="color: var(--md-error); margin-bottom: 10px;">Facturer trop tôt</h3>
                     <p class="body-medium" style="color: var(--md-on-surface-variant);">Tue l'adoption → Réseau vide → Service inutile</p>
                 </div>
@@ -400,8 +406,8 @@
                     <p class="label-medium" style="color: var(--md-outline); margin-top: 8px;">Le dilemme</p>
                 </div>
 
-                <div class="md-card md-card-elevated" style="padding: 28px; text-align: center; border: 2px solid var(--md-error);">
-                    <span class="material-symbols-outlined" style="font-size: 44px; color: var(--md-error); margin-bottom: 16px;">money_off</span>
+                <div class="md-card md-card-elevated slide-2-card" style="padding: 28px; text-align: center; border: 2px solid var(--md-error);">
+                    <span class="material-symbols-outlined slide-2-icon" style="font-size: 44px; color: var(--md-error); margin-bottom: 16px; display: block;">money_off</span>
                     <h3 class="title-medium" style="color: var(--md-error); margin-bottom: 10px;">Tout gratuit</h3>
                     <p class="body-medium" style="color: var(--md-on-surface-variant);">Pas de revenus → Non viable → Projet meurt</p>
                 </div>
