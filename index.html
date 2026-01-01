@@ -335,8 +335,9 @@
             .hybrid-operator { transform: rotate(90deg); padding: 8px 0; }
             .constraint-card { flex-direction: column; text-align: center; }
             .constraint-icon { margin: 0 auto; }
-            .slide-2-dilemma { grid-template-columns: 1fr; gap: 16px; }
-            .dilemma-divider { padding: 16px 0; order: 2; }
+            .slide-2-dilemma { grid-template-columns: 1fr auto; gap: 16px; grid-auto-flow: dense; max-width: 90%; margin: 0 auto; }
+            .slide-2-dilemma .slide-2-card:nth-child(3) { grid-column: 1; }
+            .dilemma-divider { padding: 0; order: 2; align-self: center; }
             .slide-2-icon { font-size: 36px !important; }
             .slide-2-card { padding: 20px !important; }
         }
@@ -359,8 +360,9 @@
             .component-value { font-size: 1.125rem; }
             .md-card { padding: 16px; }
             .card-grid { gap: 8px; }
-            .slide-2-dilemma { grid-template-columns: 1fr; gap: 12px; }
-            .dilemma-divider { display: none; }
+            .slide-2-dilemma { grid-template-columns: 1fr auto; gap: 12px; grid-auto-flow: dense; max-width: 95%; margin: 0 auto; }
+            .slide-2-dilemma .slide-2-card:nth-child(3) { grid-column: 1; }
+            .dilemma-divider { padding: 0; align-self: center; }
             .md-card-elevated { padding: 16px !important; }
             .slide-2-icon { font-size: 32px !important; }
             .slide-2-card { padding: 16px !important; }
