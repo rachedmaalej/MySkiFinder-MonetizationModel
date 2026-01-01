@@ -4,1616 +4,577 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MySkiFinder - Stratégie de Monétisation</title>
-    <!-- Google Sans for headlines (Material Design 3 recommended) -->
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Display:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Roboto for body text -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Flex:opsz,wght@8..144,300;8..144,400;8..144,500;8..144,700&display=swap" rel="stylesheet">
-    <!-- Material Symbols (newer, variable icon font) -->
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            /* Material Design 3 Color System - Custom Palette from Color Chart */
-            
-            /* Primary - Teal/Green (row 5 from chart) */
             --md-primary: #45998A;
             --md-on-primary: #FFFFFF;
             --md-primary-container: #ACE4CB;
             --md-on-primary-container: #267675;
-            
-            /* Secondary - Orange (row 3 from chart) */
             --md-secondary: #F48E40;
             --md-on-secondary: #FFFFFF;
             --md-secondary-container: #FFCD80;
             --md-on-secondary-container: #9D3A22;
-            
-            /* Tertiary - Purple (row 4 from chart) */
             --md-tertiary: #8E6FBF;
             --md-on-tertiary: #FFFFFF;
             --md-tertiary-container: #DCC9EC;
-            --md-on-tertiary-container: #79409E;
-            
-            /* Error - Red (row 7 from chart) */
             --md-error: #E65655;
             --md-on-error: #FFFFFF;
             --md-error-container: #FFB9BB;
             --md-on-error-container: #CE2B26;
-            
-            /* Success - Green (row 2 from chart) */
             --md-success: #549F3A;
             --md-on-success: #FFFFFF;
             --md-success-container: #BCE48E;
             --md-on-success-container: #357D23;
-            
-            /* Surface colors - Gray (row 8 from chart) */
             --md-surface: #FAFAFA;
             --md-on-surface: #1C1B1F;
             --md-surface-variant: #E8E8E8;
             --md-on-surface-variant: #5B5B5B;
             --md-surface-container: #F5F5F5;
-            --md-surface-container-high: #E8E8E8;
-            --md-surface-container-highest: #D1D1D1;
-            
-            /* Outline colors */
+            --md-surface-container-high: #EFEFEF;
             --md-outline: #A2A2A2;
             --md-outline-variant: #BABABA;
-            
-            /* Additional semantic colors from chart */
             --md-info: #4A8EBF;
             --md-info-container: #B6DBF3;
-            --md-on-info-container: #34659F;
-            
-            --md-warning: #FBAC54;
-            --md-warning-container: #FFE9B7;
-            --md-on-warning-container: #E15720;
-            
-            /* Pink (row 6 from chart) */
-            --md-pink: #CF51AC;
-            --md-pink-container: #F7B8DE;
-            --md-on-pink-container: #A12B9B;
-
-            /* Material Design 3 Elevation - with tonal surface tint */
-            --md-elevation-0: none;
             --md-elevation-1: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15);
             --md-elevation-2: 0 1px 2px rgba(0,0,0,0.3), 0 2px 6px 2px rgba(0,0,0,0.15);
             --md-elevation-3: 0 1px 3px rgba(0,0,0,0.3), 0 4px 8px 3px rgba(0,0,0,0.15);
-            --md-elevation-4: 0 2px 3px rgba(0,0,0,0.3), 0 6px 10px 4px rgba(0,0,0,0.15);
-            --md-elevation-5: 0 4px 4px rgba(0,0,0,0.3), 0 8px 12px 6px rgba(0,0,0,0.15);
-
-            /* Typography - Font Families */
-            --md-font-brand: 'Google Sans', 'Product Sans', 'Roboto', sans-serif;
-            --md-font-plain: 'Roboto', 'Roboto Flex', sans-serif;
-            
-            /* Material Design 3 Shape Scale */
-            --md-shape-none: 0px;
-            --md-shape-extra-small: 4px;
+            --md-font-brand: 'Google Sans', 'Roboto', sans-serif;
+            --md-font-plain: 'Roboto', sans-serif;
             --md-shape-small: 8px;
             --md-shape-medium: 12px;
             --md-shape-large: 16px;
             --md-shape-extra-large: 28px;
-            --md-shape-full: 9999px;
         }
-
-        html {
-            scroll-behavior: smooth;
-            scroll-snap-type: y mandatory;
-        }
-
-        body {
-            font-family: var(--md-font-plain);
-            background: var(--md-surface);
-            color: var(--md-on-surface);
-            line-height: 1.5;
-            overflow-x: hidden;
-            font-weight: 400;
-        }
-
-        /* Material Symbols Configuration */
-        .material-symbols-outlined {
-            font-variation-settings:
-                'FILL' 0,
-                'wght' 400,
-                'GRAD' 0,
-                'opsz' 24;
-            font-size: inherit;
-            vertical-align: middle;
-        }
-
-        /* Filled icon variant */
-        .material-symbols-outlined.filled {
-            font-variation-settings:
-                'FILL' 1,
-                'wght' 400,
-                'GRAD' 0,
-                'opsz' 24;
-        }
-
-        /* Slide Counter - Material Design 3 Chip */
-        .slide-counter {
-            position: fixed;
-            top: 24px;
-            right: 32px;
-            font-family: var(--md-font-plain);
-            font-size: 0.875rem;
-            font-weight: 500;
-            letter-spacing: 0.1px;
-            color: var(--md-on-surface-variant);
-            z-index: 1000;
-            background: var(--md-surface);
-            padding: 8px 16px;
-            border-radius: 8px;
-            box-shadow: var(--md-elevation-2);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .slide-counter .material-symbols-outlined {
-            font-size: 18px;
-            color: var(--md-primary);
-        }
-
-        /* Navigation Sidebar - Material Navigation Rail */
-        .nav-sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            height: 100vh;
-            width: 280px;
-            background: var(--md-surface);
-            box-shadow: var(--md-elevation-3);
-            z-index: 999;
-            padding: 16px 0;
-            display: flex;
-            flex-direction: column;
-            transform: translateX(-232px);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .nav-sidebar:hover {
-            transform: translateX(0);
-        }
-
-        .nav-trigger {
-            position: absolute;
-            right: -48px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 48px;
-            height: 80px;
-            background: var(--md-surface);
-            border-radius: 0 16px 16px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--md-elevation-2);
-            cursor: pointer;
-        }
-
-        .nav-trigger .material-symbols-outlined {
-            font-size: 24px;
-            color: var(--md-on-surface-variant);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .nav-sidebar:hover .nav-trigger .material-symbols-outlined {
-            transform: rotate(180deg);
-        }
-
-        .nav-logo {
-            padding: 16px 24px 24px;
-            border-bottom: 1px solid var(--md-outline-variant);
-            margin-bottom: 8px;
-        }
-
-        .nav-logo h2 {
-            font-family: var(--md-font-brand);
-            font-size: 1.375rem;
-            color: var(--md-primary);
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .nav-logo span {
-            font-family: var(--md-font-plain);
-            font-size: 0.6875rem;
-            color: var(--md-on-surface-variant);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 500;
-        }
-
-        .nav-items {
-            flex: 1;
-            overflow-y: auto;
-            padding: 0 12px;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            padding: 16px;
-            color: var(--md-on-surface-variant);
-            text-decoration: none;
-            font-family: var(--md-font-plain);
-            font-size: 0.875rem;
-            font-weight: 500;
-            letter-spacing: 0.1px;
-            border-radius: 100px;
-            margin-bottom: 4px;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .nav-item:hover {
-            background: var(--md-surface-variant);
-            color: var(--md-on-surface);
-        }
-
-        .nav-item.active {
-            background: var(--md-secondary-container);
-            color: var(--md-on-secondary-container);
-        }
-
-        .nav-item-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            background: var(--md-surface-variant);
-            border-radius: 50%;
-            font-size: 0.75rem;
-            margin-right: 12px;
-            font-weight: 500;
-        }
-
-        .nav-item.active .nav-item-number {
-            background: var(--md-primary);
-            color: var(--md-on-primary);
-        }
-
-        /* Slides */
-        .slide {
-            min-height: 100vh;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 64px 80px 64px 120px;
-            scroll-snap-align: start;
-            position: relative;
-        }
-
-        .slide-content {
-            max-width: 1200px;
-            width: 100%;
-        }
-
-        /* Slide Themes */
-        .slide-primary {
-            background: var(--md-primary);
-            color: var(--md-on-primary);
-        }
-
-        .slide-primary-container {
-            background: var(--md-primary-container);
-            color: var(--md-on-primary-container);
-        }
-
-        .slide-secondary {
-            background: var(--md-secondary);
-            color: var(--md-on-secondary);
-        }
-
-        .slide-tertiary {
-            background: var(--md-tertiary);
-            color: var(--md-on-tertiary);
-        }
-
-        .slide-surface {
-            background: var(--md-surface);
-            color: var(--md-on-surface);
-        }
-
-        .slide-surface-variant {
-            background: var(--md-surface-variant);
-            color: var(--md-on-surface);
-        }
-
-        /* ===========================================
-           Material Design 3 Typography Scale
-           Using Google Sans for Display/Headlines
-           Using Roboto for Body/Labels
-           =========================================== */
-
-        /* Display - Large */
-        .display-large {
-            font-family: var(--md-font-brand);
-            font-size: 3.5625rem; /* 57px */
-            font-weight: 400;
-            line-height: 1.12;
-            letter-spacing: -0.25px;
-        }
-
-        /* Display - Medium */
-        .display-medium {
-            font-family: var(--md-font-brand);
-            font-size: 2.8125rem; /* 45px */
-            font-weight: 400;
-            line-height: 1.15;
-            letter-spacing: 0;
-        }
-
-        /* Display - Small */
-        .display-small {
-            font-family: var(--md-font-brand);
-            font-size: 2.25rem; /* 36px */
-            font-weight: 400;
-            line-height: 1.22;
-            letter-spacing: 0;
-        }
-
-        /* Headline - Large */
-        .headline-large {
-            font-family: var(--md-font-brand);
-            font-size: 2rem; /* 32px */
-            font-weight: 400;
-            line-height: 1.25;
-            letter-spacing: 0;
-        }
-
-        /* Headline - Medium */
-        .headline-medium {
-            font-family: var(--md-font-brand);
-            font-size: 1.75rem; /* 28px */
-            font-weight: 400;
-            line-height: 1.28;
-            letter-spacing: 0;
-        }
-
-        /* Headline - Small */
-        .headline-small {
-            font-family: var(--md-font-brand);
-            font-size: 1.5rem; /* 24px */
-            font-weight: 400;
-            line-height: 1.33;
-            letter-spacing: 0;
-        }
-
-        /* Title - Large */
-        .title-large {
-            font-family: var(--md-font-brand);
-            font-size: 1.375rem; /* 22px */
-            font-weight: 400;
-            line-height: 1.27;
-            letter-spacing: 0;
-        }
-
-        /* Title - Medium */
-        .title-medium {
-            font-family: var(--md-font-plain);
-            font-size: 1rem; /* 16px */
-            font-weight: 500;
-            line-height: 1.5;
-            letter-spacing: 0.15px;
-        }
-
-        /* Title - Small */
-        .title-small {
-            font-family: var(--md-font-plain);
-            font-size: 0.875rem; /* 14px */
-            font-weight: 500;
-            line-height: 1.43;
-            letter-spacing: 0.1px;
-        }
-
-        /* Body - Large */
-        .body-large {
-            font-family: var(--md-font-plain);
-            font-size: 1rem; /* 16px */
-            font-weight: 400;
-            line-height: 1.5;
-            letter-spacing: 0.5px;
-        }
-
-        /* Body - Medium */
-        .body-medium {
-            font-family: var(--md-font-plain);
-            font-size: 0.875rem; /* 14px */
-            font-weight: 400;
-            line-height: 1.43;
-            letter-spacing: 0.25px;
-        }
-
-        /* Body - Small */
-        .body-small {
-            font-family: var(--md-font-plain);
-            font-size: 0.75rem; /* 12px */
-            font-weight: 400;
-            line-height: 1.33;
-            letter-spacing: 0.4px;
-        }
-
-        /* Label - Large */
-        .label-large {
-            font-family: var(--md-font-plain);
-            font-size: 0.875rem; /* 14px */
-            font-weight: 500;
-            line-height: 1.43;
-            letter-spacing: 0.1px;
-        }
-
-        /* Label - Medium */
-        .label-medium {
-            font-family: var(--md-font-plain);
-            font-size: 0.75rem; /* 12px */
-            font-weight: 500;
-            line-height: 1.33;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        /* Label - Small */
-        .label-small {
-            font-family: var(--md-font-plain);
-            font-size: 0.6875rem; /* 11px */
-            font-weight: 500;
-            line-height: 1.45;
-            letter-spacing: 0.5px;
-        }
-
-        .slide-label {
-            font-family: var(--md-font-plain);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            opacity: 0.7;
-            margin-bottom: 16px;
-            font-weight: 500;
-        }
-
-        /* Big Numbers - Using Brand Font */
-        .big-number {
-            font-family: var(--md-font-brand);
-            font-size: 7rem;
-            font-weight: 400;
-            line-height: 1;
-            margin-bottom: 16px;
-            letter-spacing: -1px;
-        }
-
-        .big-stat {
-            font-family: var(--md-font-brand);
-            font-size: 4.5rem;
-            font-weight: 400;
-            line-height: 1;
-            letter-spacing: -0.5px;
-        }
-
-        /* Material Design 3 Cards - Following M3 Specs */
-        /* Cards have 12dp corner radius (medium), 16dp padding for content areas */
-        /* Three types: Elevated (default), Filled, Outlined */
-        
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px; /* M3 recommends 8, 16, 24, or 40dp gutters */
-            margin-top: 24px;
-        }
-
-        /* Base Card - Elevated (default in M3) */
-        .md-card {
-            background: var(--md-surface-container);
-            border-radius: var(--md-shape-medium); /* 12px */
-            padding: 16px; /* M3 standard content padding */
-            box-shadow: var(--md-elevation-1);
-            transition: box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1),
-                        transform 0.2s cubic-bezier(0.2, 0, 0, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .md-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--md-primary);
-            opacity: 0;
-            transition: opacity 0.2s;
-            pointer-events: none;
-        }
-
-        .md-card:hover {
-            box-shadow: var(--md-elevation-2);
-        }
-
-        .md-card:hover::before {
-            opacity: 0.04; /* M3 hover state layer */
-        }
-
-        /* Elevated Card - Higher elevation */
-        .md-card-elevated {
-            background: var(--md-surface-container);
-            box-shadow: var(--md-elevation-1);
-        }
-
-        .md-card-elevated:hover {
-            box-shadow: var(--md-elevation-2);
-        }
-
-        /* Filled Card - No shadow, uses surface container color */
-        .md-card-filled {
-            background: var(--md-surface-container-high);
-            box-shadow: var(--md-elevation-0);
-        }
-
-        .md-card-filled:hover {
-            box-shadow: var(--md-elevation-1);
-        }
-
-        /* Outlined Card - No shadow, has outline */
-        .md-card-outlined {
-            background: var(--md-surface);
-            border: 1px solid var(--md-outline-variant);
-            box-shadow: var(--md-elevation-0);
-        }
-
-        .md-card-outlined:hover {
-            box-shadow: var(--md-elevation-1);
-        }
-
-        /* Card on dark backgrounds */
-        .card-on-dark {
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.12);
-            box-shadow: none;
-        }
-
-        .card-on-dark:hover {
-            background: rgba(255,255,255,0.12);
-        }
-
-        /* Card Header - optional headline area */
-        .card-header {
-            padding: 16px 16px 0 16px;
-        }
-
-        /* Card Content - main content area */
-        .card-content {
-            padding: 16px;
-        }
-
-        /* Card Actions - action buttons area */
-        .card-actions {
-            padding: 8px;
-            display: flex;
-            gap: 8px;
-            justify-content: flex-end;
-        }
-
-        /* Card Media - images/video at top */
-        .card-media {
-            border-radius: var(--md-shape-medium) var(--md-shape-medium) 0 0;
-            overflow: hidden;
-            margin: -16px -16px 16px -16px;
-        }
-
-        .card-media img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Card Icon Container */
-        .card-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: var(--md-shape-medium);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 16px;
-        }
-
-        .card-icon .material-symbols-outlined {
-            font-size: 24px;
-        }
-
-        /* Card Title */
-        .card-title {
-            font-family: var(--md-font-plain);
-            font-size: 1rem;
-            font-weight: 500;
-            margin-bottom: 8px;
-            letter-spacing: 0.15px;
-            color: var(--md-on-surface);
-        }
-
-        /* Card Headline (large value) */
-        .card-value {
-            font-family: var(--md-font-brand);
-            font-size: 2.25rem;
-            font-weight: 400;
-            margin-bottom: 8px;
-            color: var(--md-on-surface);
-        }
-
-        /* Card Supporting Text */
-        .card-desc {
-            font-family: var(--md-font-plain);
-            font-size: 0.875rem;
-            color: var(--md-on-surface-variant);
-            line-height: 1.43;
-            letter-spacing: 0.25px;
-        }
-
-        /* Comparison Grid */
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 24px;
-        }
-
-        .comparison-item {
-            padding: 24px;
-            border-radius: var(--md-shape-medium);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .comparison-good {
-            background: var(--md-success-container);
-            border: none;
-        }
-
-        .comparison-bad {
-            background: var(--md-error-container);
-            border: none;
-        }
-
-        /* Pricing Tiers - M3 Card Specs */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-top: 24px;
-        }
-
-        .pricing-card {
-            background: var(--md-surface-container);
-            border-radius: var(--md-shape-large); /* 16px for larger cards */
-            padding: 24px 16px;
-            text-align: center;
-            box-shadow: var(--md-elevation-1);
-            position: relative;
-            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
-        }
-
-        .pricing-card:hover {
-            box-shadow: var(--md-elevation-3);
-            transform: translateY(-4px);
-        }
-
-        .pricing-card.featured {
-            background: var(--md-primary);
-            color: var(--md-on-primary);
-            box-shadow: var(--md-elevation-2);
-        }
-
-        .pricing-badge {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--md-secondary);
-            color: var(--md-on-secondary);
-            padding: 6px 16px;
-            border-radius: var(--md-shape-small);
-            font-family: var(--md-font-plain);
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        .pricing-name {
-            font-family: var(--md-font-plain);
-            font-size: 1rem;
-            font-weight: 500;
-            margin-bottom: 8px;
-            letter-spacing: 0.15px;
-        }
-
-        .pricing-price {
-            font-family: var(--md-font-brand);
-            font-size: 2.8125rem;
-            font-weight: 400;
-            margin-bottom: 4px;
-        }
-
-        .pricing-period {
-            font-family: var(--md-font-plain);
-            font-size: 0.875rem;
-            opacity: 0.7;
-            margin-bottom: 24px;
-        }
-
-        .pricing-features {
-            text-align: left;
-            font-family: var(--md-font-plain);
-            font-size: 0.875rem;
-        }
-
-        .pricing-feature {
-            padding: 10px 0;
-            border-bottom: 1px solid var(--md-outline-variant);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .pricing-feature .material-symbols-outlined {
-            font-size: 20px;
-            color: var(--md-primary);
-        }
-
-        .pricing-card.featured .pricing-feature {
-            border-bottom-color: rgba(255,255,255,0.2);
-        }
-
-        .pricing-card.featured .pricing-feature .material-symbols-outlined {
-            color: var(--md-on-primary);
-        }
+        html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+        body { font-family: var(--md-font-plain); background: var(--md-surface); color: var(--md-on-surface); line-height: 1.6; overflow-x: hidden; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+        .material-symbols-outlined.filled { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+        /* Slide Counter */
+        .slide-counter { position: fixed; top: 24px; right: 32px; font-size: 0.875rem; font-weight: 500; color: var(--md-on-surface-variant); z-index: 1000; background: var(--md-surface); padding: 8px 16px; border-radius: 8px; box-shadow: var(--md-elevation-2); display: flex; align-items: center; gap: 8px; }
+        .slide-counter .material-symbols-outlined { font-size: 18px; color: var(--md-primary); }
+
+        /* Navigation Sidebar */
+        .nav-sidebar { position: fixed; left: 0; top: 0; height: 100vh; width: 300px; background: var(--md-surface); box-shadow: var(--md-elevation-3); z-index: 999; padding: 16px 0; display: flex; flex-direction: column; transform: translateX(-252px); transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1); }
+        .nav-sidebar:hover { transform: translateX(0); }
+        .nav-trigger { position: absolute; right: -48px; top: 50%; transform: translateY(-50%); width: 48px; height: 80px; background: var(--md-surface); border-radius: 0 16px 16px 0; display: flex; align-items: center; justify-content: center; box-shadow: var(--md-elevation-2); }
+        .nav-trigger .material-symbols-outlined { font-size: 24px; color: var(--md-on-surface-variant); transition: transform 0.3s; }
+        .nav-sidebar:hover .nav-trigger .material-symbols-outlined { transform: rotate(180deg); }
+        .nav-logo { padding: 16px 24px 20px; border-bottom: 1px solid var(--md-outline-variant); margin-bottom: 8px; }
+        .nav-logo h2 { font-family: var(--md-font-brand); font-size: 1.25rem; color: var(--md-primary); font-weight: 500; display: flex; align-items: center; gap: 12px; }
+        .nav-logo span { font-size: 0.6875rem; color: var(--md-on-surface-variant); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 4px; }
+        .nav-items { flex: 1; overflow-y: auto; padding: 0 12px; }
+        .nav-section { padding: 12px 16px 6px; font-size: 0.6875rem; font-weight: 500; color: var(--md-primary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+        .nav-item { display: flex; align-items: center; padding: 10px 16px; color: var(--md-on-surface-variant); text-decoration: none; font-size: 0.8125rem; font-weight: 400; border-radius: 100px; margin-bottom: 2px; transition: all 0.2s; }
+        .nav-item:hover { background: var(--md-surface-variant); color: var(--md-on-surface); }
+        .nav-item.active { background: var(--md-primary-container); color: var(--md-on-primary-container); font-weight: 500; }
+        .nav-item-number { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; background: var(--md-surface-variant); border-radius: 50%; font-size: 0.6875rem; font-weight: 500; margin-right: 12px; flex-shrink: 0; }
+        .nav-item.active .nav-item-number { background: var(--md-primary); color: var(--md-on-primary); }
+
+        /* Slides Base */
+        .slide { min-height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; padding: 60px 80px 60px 80px; scroll-snap-align: start; position: relative; }
+        .slide-content { max-width: 1000px; width: 100%; }
+        .slide-primary { background: var(--md-primary); color: var(--md-on-primary); }
+        .slide-secondary { background: var(--md-secondary); color: var(--md-on-secondary); }
+        .slide-tertiary { background: var(--md-tertiary); color: var(--md-on-tertiary); }
+        .slide-surface { background: var(--md-surface); color: var(--md-on-surface); }
+        .slide-dark { background: #2D3748; color: #FFFFFF; }
+        .slide-success { background: var(--md-success); color: var(--md-on-success); }
+
+        /* Typography */
+        .display-large { font-family: var(--md-font-brand); font-size: 3.25rem; font-weight: 400; line-height: 1.12; }
+        .display-medium { font-family: var(--md-font-brand); font-size: 2.75rem; font-weight: 400; line-height: 1.15; }
+        .display-small { font-family: var(--md-font-brand); font-size: 2.25rem; font-weight: 400; line-height: 1.2; }
+        .headline-large { font-family: var(--md-font-brand); font-size: 2rem; font-weight: 400; line-height: 1.25; }
+        .headline-medium { font-family: var(--md-font-brand); font-size: 1.75rem; font-weight: 400; line-height: 1.3; }
+        .title-large { font-family: var(--md-font-brand); font-size: 1.375rem; font-weight: 400; line-height: 1.3; }
+        .title-medium { font-family: var(--md-font-plain); font-size: 1rem; font-weight: 500; line-height: 1.5; letter-spacing: 0.15px; }
+        .body-large { font-family: var(--md-font-plain); font-size: 1.0625rem; font-weight: 400; line-height: 1.6; }
+        .body-medium { font-family: var(--md-font-plain); font-size: 0.9375rem; font-weight: 400; line-height: 1.5; }
+        .label-large { font-family: var(--md-font-plain); font-size: 0.875rem; font-weight: 500; line-height: 1.4; letter-spacing: 0.1px; }
+        .label-medium { font-family: var(--md-font-plain); font-size: 0.75rem; font-weight: 500; line-height: 1.33; letter-spacing: 0.5px; text-transform: uppercase; }
+
+        /* Step Indicator - Shows logical progression */
+        .step-indicator { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+        .step-number { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: rgba(255,255,255,0.2); border-radius: 50%; font-size: 0.9375rem; font-weight: 500; }
+        .step-label { font-size: 0.8125rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.85; }
+        .slide-surface .step-number { background: var(--md-primary); color: var(--md-on-primary); }
+        .slide-surface .step-label { color: var(--md-primary); }
+
+        /* Logic Connector - Shows reasoning between sections */
+        .logic-connector { display: flex; align-items: flex-start; gap: 14px; padding: 18px 20px; background: rgba(255,255,255,0.1); border-radius: var(--md-shape-medium); margin-top: 32px; border-left: 4px solid rgba(255,255,255,0.4); }
+        .logic-connector .material-symbols-outlined { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+        .slide-surface .logic-connector { background: var(--md-primary-container); border-left-color: var(--md-primary); color: var(--md-on-primary-container); }
+        .slide-surface .logic-connector .material-symbols-outlined { color: var(--md-primary); }
+
+        /* Big Numbers */
+        .big-number { font-family: var(--md-font-brand); font-size: 5rem; font-weight: 400; line-height: 1; }
+        .big-stat { font-family: var(--md-font-brand); font-size: 3.5rem; font-weight: 400; line-height: 1; }
+        .medium-stat { font-family: var(--md-font-brand); font-size: 2.5rem; font-weight: 400; line-height: 1; }
+
+        /* Cards */
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 24px; }
+        .md-card { background: var(--md-surface-container); border-radius: var(--md-shape-medium); padding: 20px; box-shadow: var(--md-elevation-1); transition: all 0.2s; }
+        .md-card:hover { box-shadow: var(--md-elevation-2); }
+        .md-card-elevated { box-shadow: var(--md-elevation-2); }
+        .md-card-filled { background: var(--md-surface-container-high); box-shadow: none; }
+        .md-card-outlined { background: var(--md-surface); border: 1px solid var(--md-outline-variant); box-shadow: none; }
+        .card-on-dark { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); }
+        .card-icon { width: 44px; height: 44px; border-radius: var(--md-shape-medium); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+        .card-icon .material-symbols-outlined { font-size: 24px; }
+        .card-title { font-family: var(--md-font-plain); font-size: 1rem; font-weight: 500; margin-bottom: 8px; }
+        .card-value { font-family: var(--md-font-brand); font-size: 2rem; font-weight: 400; }
+        .card-desc { font-size: 0.9375rem; color: var(--md-on-surface-variant); line-height: 1.5; }
+
+        /* Constraint Cards */
+        .constraint-card { display: flex; align-items: flex-start; gap: 16px; padding: 20px; background: var(--md-surface-container); border-radius: var(--md-shape-medium); margin-bottom: 12px; box-shadow: var(--md-elevation-1); }
+        .constraint-icon { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .constraint-icon .material-symbols-outlined { font-size: 24px; }
+        .constraint-content h4 { font-size: 1rem; font-weight: 500; margin-bottom: 4px; }
+        .constraint-content p { font-size: 0.9375rem; color: var(--md-on-surface-variant); line-height: 1.5; }
+
+        /* Filter Rows - Show elimination logic */
+        .filter-row { display: flex; align-items: center; gap: 16px; padding: 14px 18px; background: var(--md-surface-container); border-radius: var(--md-shape-medium); margin-bottom: 8px; }
+        .filter-row.passes { border-left: 4px solid var(--md-success); background: rgba(84, 159, 58, 0.08); }
+        .filter-row.fails { border-left: 4px solid var(--md-error); opacity: 0.75; }
+        .filter-row.partial { border-left: 4px solid var(--md-secondary); }
+        .filter-row.future { border-left: 4px solid var(--md-info); }
+        .filter-name { flex: 0 0 160px; font-weight: 500; }
+        .filter-reason { flex: 1; font-size: 0.875rem; color: var(--md-on-surface-variant); }
+        .filter-verdict { display: flex; align-items: center; gap: 6px; font-size: 0.8125rem; font-weight: 500; padding: 5px 12px; border-radius: 100px; flex-shrink: 0; }
+        .filter-verdict.pass { background: var(--md-success-container); color: var(--md-success); }
+        .filter-verdict.fail { background: var(--md-error-container); color: var(--md-error); }
+        .filter-verdict.maybe { background: var(--md-secondary-container); color: var(--md-on-secondary-container); }
+        .filter-verdict.later { background: var(--md-info-container); color: var(--md-info); }
+
+        /* Two Column Layout */
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 24px; }
 
         /* Flow Diagram */
-        .flow-diagram {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
-            margin-top: 48px;
-        }
-
-        .flow-box {
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 16px;
-            padding: 24px 32px;
-            text-align: center;
-            min-width: 160px;
-        }
-
-        .flow-box-title {
-            font-family: var(--md-font-plain);
-            font-size: 0.875rem;
-            font-weight: 500;
-            margin-bottom: 8px;
-            opacity: 0.9;
-            letter-spacing: 0.1px;
-        }
-
-        .flow-box-value {
-            font-family: var(--md-font-brand);
-            font-size: 1.375rem;
-            font-weight: 500;
-        }
-
-        .flow-arrow {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .flow-arrow .material-symbols-outlined {
-            font-size: 32px;
-            opacity: 0.6;
-        }
-
-        /* Progress Bars */
-        .progress-item {
-            margin-bottom: 24px;
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-family: var(--md-font-plain);
-            font-weight: 500;
-            font-size: 0.875rem;
-            letter-spacing: 0.1px;
-        }
-
-        .progress-bar {
-            height: 8px;
-            background: var(--md-surface-variant);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            border-radius: 4px;
-            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        .flow-horizontal { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; margin: 32px 0; }
+        .flow-box { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: var(--md-shape-medium); padding: 18px 24px; text-align: center; min-width: 140px; }
+        .flow-box-label { font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; margin-bottom: 6px; }
+        .flow-box-value { font-family: var(--md-font-brand); font-size: 1.25rem; font-weight: 500; }
+        .flow-arrow { font-size: 28px; opacity: 0.5; }
 
         /* Stats Row */
-        .stats-row {
-            display: flex;
-            gap: 48px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 48px;
-        }
+        .stats-row { display: flex; gap: 48px; justify-content: center; flex-wrap: wrap; margin: 32px 0; }
+        .stat-item { text-align: center; }
+        .stat-value { font-family: var(--md-font-brand); font-size: 2.75rem; font-weight: 400; line-height: 1; }
+        .stat-label { font-size: 0.9375rem; opacity: 0.8; margin-top: 8px; line-height: 1.4; }
 
-        .stat-item {
-            text-align: center;
-        }
+        /* Progress Bars */
+        .progress-item { margin-bottom: 20px; }
+        .progress-label { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 500; font-size: 0.9375rem; }
+        .progress-bar { height: 10px; background: var(--md-surface-variant); border-radius: 5px; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 5px; }
 
-        .stat-value {
-            font-family: var(--md-font-brand);
-            font-size: 3.5rem;
-            font-weight: 400;
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-family: var(--md-font-plain);
-            font-size: 0.875rem;
-            opacity: 0.8;
-            margin-top: 8px;
-            letter-spacing: 0.25px;
-        }
-
-        /* Icon Container */
-        .icon-container {
-            width: 64px;
-            height: 64px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 16px;
-        }
-
-        .icon-container .material-symbols-outlined {
-            font-size: 32px;
-        }
-
-        .icon-container-large {
-            width: 80px;
-            height: 80px;
-            border-radius: 20px;
-        }
-
-        .icon-container-large .material-symbols-outlined {
-            font-size: 40px;
-        }
-
-        /* Feature List */
-        .feature-list {
-            list-style: none;
-            margin-top: 24px;
-        }
-
-        .feature-list li {
-            padding: 12px 0;
-            font-family: var(--md-font-plain);
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            letter-spacing: 0.5px;
-        }
-
-        .feature-list li .material-symbols-outlined {
-            font-size: 24px;
-            color: rgba(255,255,255,0.9);
-        }
+        /* Pricing Cards */
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+        .pricing-card { background: var(--md-surface-container); border-radius: var(--md-shape-large); padding: 24px 20px; text-align: center; box-shadow: var(--md-elevation-1); position: relative; }
+        .pricing-card.featured { background: var(--md-primary); color: var(--md-on-primary); box-shadow: var(--md-elevation-2); transform: scale(1.03); }
+        .pricing-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--md-secondary); color: var(--md-on-secondary); padding: 4px 14px; border-radius: var(--md-shape-small); font-size: 0.6875rem; font-weight: 500; text-transform: uppercase; }
+        .pricing-name { font-size: 0.875rem; font-weight: 500; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .pricing-price { font-family: var(--md-font-brand); font-size: 2.5rem; font-weight: 400; }
+        .pricing-period { font-size: 0.875rem; opacity: 0.7; margin-bottom: 16px; }
+        .pricing-features { text-align: left; font-size: 0.875rem; }
+        .pricing-feature { padding: 8px 0; border-bottom: 1px solid var(--md-outline-variant); display: flex; align-items: center; gap: 10px; }
+        .pricing-feature:last-child { border-bottom: none; }
+        .pricing-feature .material-symbols-outlined { font-size: 18px; color: var(--md-primary); }
+        .pricing-card.featured .pricing-feature { border-bottom-color: rgba(255,255,255,0.2); }
+        .pricing-card.featured .pricing-feature .material-symbols-outlined { color: var(--md-on-primary); }
 
         /* Revenue Chart */
-        .revenue-chart {
-            display: flex;
-            align-items: flex-end;
-            gap: 24px;
-            height: 280px;
-            padding: 24px;
-            background: var(--md-surface-variant);
-            border-radius: 16px;
-            margin-top: 32px;
+        .revenue-chart { display: flex; align-items: flex-end; gap: 12px; height: 200px; padding: 16px; background: var(--md-surface-container); border-radius: var(--md-shape-medium); margin-top: 24px; }
+        .chart-bar { flex: 1; display: flex; flex-direction: column; align-items: center; }
+        .chart-bar-fill { width: 100%; max-width: 40px; border-radius: 4px 4px 0 0; }
+        .chart-bar-label { margin-top: 8px; font-weight: 500; font-size: 0.6875rem; color: var(--md-on-surface-variant); }
+        .chart-bar-value { font-weight: 500; font-size: 0.75rem; margin-top: 2px; }
+
+        /* Feature List */
+        .feature-list { list-style: none; margin-top: 16px; }
+        .feature-list li { padding: 12px 0; font-size: 1rem; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .feature-list li:last-child { border-bottom: none; }
+        .feature-list li .material-symbols-outlined { font-size: 22px; }
+        .slide-surface .feature-list li { border-bottom-color: var(--md-outline-variant); }
+
+        /* Conclusion Box */
+        .conclusion-box { padding: 24px; background: rgba(255,255,255,0.12); border-radius: var(--md-shape-medium); border: 2px solid rgba(255,255,255,0.3); margin-top: 32px; text-align: center; }
+        .slide-surface .conclusion-box { background: var(--md-success-container); border-color: var(--md-success); }
+
+        /* Pulsing animation for interactive hints */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
         }
 
-        .chart-bar {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* Subtle glow animation for instruction button */
+        @keyframes subtleGlow {
+            0%, 100% {
+                box-shadow: 0 2px 8px rgba(69, 153, 138, 0.25);
+            }
+            50% {
+                box-shadow: 0 6px 24px rgba(69, 153, 138, 0.50);
+            }
         }
 
-        .chart-bar-fill {
-            width: 100%;
-            max-width: 60px;
-            border-radius: 8px 8px 0 0;
-            transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        /* Model Cards (Clickable) */
+        .model-card { cursor: pointer; transition: all 0.2s cubic-bezier(0.2, 0, 0, 1); position: relative; overflow: hidden; }
+        .model-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(69, 153, 138, 0.2); }
+        .model-card::after { content: '→'; position: absolute; top: 10px; right: 14px; font-size: 16px; color: var(--md-primary); opacity: 0; font-weight: 700; transition: opacity 0.2s ease; }
+        .model-card:hover::after { opacity: 0.8; }
 
-        .chart-bar-label {
-            margin-top: 12px;
-            font-family: var(--md-font-plain);
-            font-weight: 500;
-            font-size: 0.75rem;
-            color: var(--md-on-surface-variant);
-            letter-spacing: 0.5px;
-        }
-
-        .chart-bar-value {
-            font-family: var(--md-font-plain);
-            font-weight: 500;
-            font-size: 0.875rem;
-            margin-top: 4px;
-            color: var(--md-on-surface);
-        }
-
-        /* Pie Legend */
-        .pie-container {
-            display: flex;
-            align-items: center;
-            gap: 48px;
-            margin-top: 32px;
-        }
-
-        .pie-legend {
-            flex: 1;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 0;
-        }
-
-        .legend-color {
-            width: 16px;
-            height: 16px;
-            border-radius: 4px;
-        }
-
-        .legend-label {
-            flex: 1;
-            font-family: var(--md-font-plain);
-            font-weight: 400;
-            font-size: 0.875rem;
-            letter-spacing: 0.25px;
-        }
-
-        .legend-value {
-            font-family: var(--md-font-plain);
-            font-weight: 500;
-        }
+        /* Modal */
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; z-index: 2000; opacity: 0; visibility: hidden; transition: all 0.3s; padding: 24px; }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-dialog { background: var(--md-surface-container-high); border-radius: var(--md-shape-extra-large); max-width: 540px; width: 100%; max-height: 85vh; overflow: hidden; box-shadow: var(--md-elevation-3); transform: scale(0.9) translateY(20px); transition: transform 0.3s; }
+        .modal-overlay.active .modal-dialog { transform: scale(1) translateY(0); }
+        .modal-header { display: flex; align-items: flex-start; gap: 16px; padding: 24px 24px 12px; position: relative; }
+        .modal-icon { width: 44px; height: 44px; border-radius: var(--md-shape-medium); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .modal-icon .material-symbols-outlined { font-size: 24px; }
+        .modal-icon.success { background: var(--md-success-container); }
+        .modal-icon.success .material-symbols-outlined { color: var(--md-success); }
+        .modal-icon.warning { background: var(--md-secondary-container); }
+        .modal-icon.warning .material-symbols-outlined { color: var(--md-secondary); }
+        .modal-icon.error { background: var(--md-error-container); }
+        .modal-icon.error .material-symbols-outlined { color: var(--md-error); }
+        .modal-icon.future { background: var(--md-info-container); }
+        .modal-icon.future .material-symbols-outlined { color: var(--md-info); }
+        .modal-close { position: absolute; top: 16px; right: 16px; width: 40px; height: 40px; border: none; background: transparent; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .modal-close:hover { background: var(--md-surface-variant); }
+        .modal-close .material-symbols-outlined { font-size: 24px; color: var(--md-on-surface-variant); }
+        .modal-content { padding: 0 24px 24px; overflow-y: auto; max-height: calc(85vh - 80px); }
+        .modal-section { padding: 14px 0; }
+        .modal-divider { height: 1px; background: var(--md-outline-variant); }
+        .modal-list { list-style: none; margin: 0; padding: 0; }
+        .modal-list li { padding: 6px 0; display: flex; align-items: flex-start; gap: 10px; font-size: 0.9375rem; }
+        .modal-list li::before { content: '•'; color: var(--md-outline); font-weight: bold; }
+        .modal-footer-info { display: flex; align-items: center; justify-content: space-between; padding: 14px 0 6px; gap: 16px; flex-wrap: wrap; }
+        .modal-stat { display: flex; align-items: center; gap: 10px; }
+        .modal-stat .material-symbols-outlined { font-size: 22px; color: var(--md-primary); }
+        .modal-verdict { display: flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 100px; font-size: 0.8125rem; font-weight: 500; }
+        .modal-verdict.recommended { background: var(--md-success-container); color: var(--md-success); }
+        .modal-verdict.not-recommended { background: var(--md-error-container); color: var(--md-error); }
+        .modal-verdict.partial { background: var(--md-secondary-container); color: var(--md-on-secondary-container); }
+        .modal-verdict.future { background: var(--md-info-container); color: var(--md-info); }
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .slide {
-                padding: 48px 32px;
-            }
-            
-            .nav-sidebar {
-                transform: translateX(-280px);
-            }
-            
-            .display-large {
-                font-size: 2.8125rem;
-            }
-            
-            .big-number {
-                font-size: 5rem;
-            }
-            
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .comparison-grid {
-                grid-template-columns: 1fr;
-            }
+            .slide { padding: 48px 32px; }
+            .nav-sidebar { transform: translateX(-300px); }
+            .display-large { font-size: 2.5rem; }
+            .big-number { font-size: 4rem; }
+            .pricing-grid, .two-col { grid-template-columns: 1fr; }
+            .filter-row { flex-wrap: wrap; }
+            .filter-reason { flex: 100%; order: 3; margin-top: 8px; }
         }
-
         @media (max-width: 768px) {
-            .slide {
-                padding: 32px 24px;
-            }
-            
-            .slide-counter {
-                top: 16px;
-                right: 16px;
-                font-size: 0.75rem;
-            }
-            
-            .nav-sidebar {
-                display: none;
-            }
-            
-            .display-large {
-                font-size: 2.25rem;
-            }
-            
-            .big-number {
-                font-size: 4rem;
-            }
-            
-            .big-stat {
-                font-size: 3rem;
-            }
-            
-            .stats-row {
-                gap: 24px;
-            }
-            
-            .stat-value {
-                font-size: 2.5rem;
-            }
-            
-            .flow-diagram {
-                flex-direction: column;
-            }
-            
-            .flow-arrow .material-symbols-outlined {
-                transform: rotate(90deg);
-            }
+            .slide { padding: 32px 24px; }
+            .slide-counter { top: 16px; right: 16px; font-size: 0.75rem; padding: 6px 12px; }
+            .nav-sidebar { display: none; }
+            .display-large { font-size: 2rem; }
+            .display-small { font-size: 1.75rem; }
+            .big-number { font-size: 3rem; }
+            .big-stat { font-size: 2.5rem; }
+            .stats-row { gap: 24px; }
+            .stat-value { font-size: 2rem; }
+            .flow-horizontal { flex-direction: column; }
+            .flow-arrow { transform: rotate(90deg); }
+            .constraint-card { flex-direction: column; text-align: center; }
+            .constraint-icon { margin: 0 auto; }
         }
 
         /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(24px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .slide.active .slide-content > * {
-            animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        /* Model Cards - Interactive */
-        .model-card {
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-
-        .model-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--md-elevation-3);
-        }
-
-        .model-card:active {
-            transform: translateY(-2px);
-        }
-
-        .model-card::after {
-            content: '';
-            position: absolute;
-            bottom: 8px;
-            right: 8px;
-            width: 20px;
-            height: 20px;
-            background: var(--md-primary-container);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-
-        .model-card:hover::after {
-            opacity: 1;
-        }
-
-        /* Modal Overlay */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.32);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
-            padding: 24px;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Modal Dialog - M3 Dialog specs */
-        .modal-dialog {
-            background: var(--md-surface-container-high);
-            border-radius: var(--md-shape-extra-large); /* 28px */
-            max-width: 560px;
-            width: 100%;
-            max-height: 90vh;
-            overflow: hidden;
-            box-shadow: var(--md-elevation-3);
-            transform: scale(0.9) translateY(20px);
-            transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1);
-        }
-
-        .modal-overlay.active .modal-dialog {
-            transform: scale(1) translateY(0);
-        }
-
-        .modal-header {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            padding: 24px 24px 16px;
-            position: relative;
-        }
-
-        .modal-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: var(--md-shape-medium);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--md-primary-container);
-            flex-shrink: 0;
-        }
-
-        .modal-icon .material-symbols-outlined {
-            font-size: 24px;
-            color: var(--md-primary);
-        }
-
-        .modal-icon.success {
-            background: var(--md-success-container);
-        }
-
-        .modal-icon.success .material-symbols-outlined {
-            color: var(--md-success);
-        }
-
-        .modal-icon.warning {
-            background: var(--md-warning-container);
-        }
-
-        .modal-icon.warning .material-symbols-outlined {
-            color: var(--md-secondary);
-        }
-
-        .modal-icon.error {
-            background: var(--md-error-container);
-        }
-
-        .modal-icon.error .material-symbols-outlined {
-            color: var(--md-error);
-        }
-
-        .modal-icon.future {
-            background: var(--md-info-container);
-        }
-
-        .modal-icon.future .material-symbols-outlined {
-            color: var(--md-info);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            width: 40px;
-            height: 40px;
-            border: none;
-            background: transparent;
-            border-radius: var(--md-shape-full);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s cubic-bezier(0.2, 0, 0, 1);
-        }
-
-        .modal-close:hover {
-            background: var(--md-surface-container-highest);
-        }
-
-        .modal-close .material-symbols-outlined {
-            font-size: 24px;
-            color: var(--md-on-surface-variant);
-        }
-
-        .modal-content {
-            padding: 0 24px 24px;
-            overflow-y: auto;
-            max-height: calc(90vh - 100px);
-        }
-
-        .modal-section {
-            padding: 16px 0;
-        }
-
-        .modal-divider {
-            height: 1px;
-            background: var(--md-outline-variant);
-        }
-
-        .modal-list {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .modal-list li {
-            padding: 6px 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            font-family: var(--md-font-plain);
-            font-size: 0.875rem;
-            color: var(--md-on-surface);
-            letter-spacing: 0.25px;
-        }
-
-        .modal-list li::before {
-            content: '•';
-            color: var(--md-outline);
-            font-weight: bold;
-        }
-
-        .modal-footer-info {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 0 8px;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .modal-stat {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .modal-stat .material-symbols-outlined {
-            font-size: 24px;
-            color: var(--md-primary);
-        }
-
-        .modal-verdict {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            border-radius: 100px;
-            font-family: var(--md-font-plain);
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-
-        .modal-verdict.recommended {
-            background: var(--md-success-container);
-            color: var(--md-success);
-        }
-
-        .modal-verdict.not-recommended {
-            background: var(--md-error-container);
-            color: var(--md-error);
-        }
-
-        .modal-verdict.partial {
-            background: var(--md-tertiary-container);
-            color: var(--md-tertiary);
-        }
-
-        .modal-verdict.future {
-            background: var(--md-secondary-container);
-            color: var(--md-secondary);
-        }
-
-        .modal-verdict .material-symbols-outlined {
-            font-size: 18px;
-        }
-
-        @media (max-width: 768px) {
-            .modal-dialog {
-                margin: 16px;
-                max-height: calc(100vh - 32px);
-            }
-            
-            .modal-footer-info {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .slide.active .slide-content > * { animation: fadeInUp 0.5s cubic-bezier(0.2, 0, 0, 1) forwards; }
     </style>
 </head>
 <body>
-
     <!-- Slide Counter -->
     <div class="slide-counter">
         <span class="material-symbols-outlined filled">layers</span>
-        <span id="currentSlide">1</span>/<span id="totalSlides">18</span>
+        <span id="currentSlide">1</span>/<span id="totalSlides">20</span>
     </div>
 
     <!-- Navigation Sidebar -->
-    <nav class="nav-sidebar" id="navSidebar">
-        <div class="nav-trigger">
-            <span class="material-symbols-outlined">chevron_right</span>
-        </div>
+    <nav class="nav-sidebar">
+        <div class="nav-trigger"><span class="material-symbols-outlined">chevron_right</span></div>
         <div class="nav-logo">
-            <span>Présentation</span>
+            <span>Discussion Fondateurs</span>
             <h2><span class="material-symbols-outlined filled">downhill_skiing</span> MySkiFinder</h2>
         </div>
-        <div class="nav-items" id="navItems">
-            <!-- Generated by JS -->
-        </div>
+        <div class="nav-items" id="navItems"></div>
     </nav>
 
+    <!-- ============================================================ -->
+    <!-- SECTION 1: LA QUESTION - Comprendre notre défi unique        -->
+    <!-- ============================================================ -->
+
     <!-- SLIDE 1: Title -->
-    <section class="slide slide-primary" data-chapter="Introduction">
+    <section class="slide slide-primary" data-chapter="La Question">
         <div class="slide-content" style="text-align: center;">
-            <div class="slide-label">Stratégie de Monétisation</div>
+            <p class="label-medium" style="opacity: 0.7; margin-bottom: 20px;">Discussion Fondateurs • Décembre 2025</p>
             <h1 class="display-large" style="margin-bottom: 24px;">MySkiFinder</h1>
-            <p class="headline-medium" style="opacity: 0.9; margin-bottom: 48px;">Comment transformer un service gratuit en business durable</p>
-            <div class="icon-container-large" style="background: rgba(255,255,255,0.15); margin: 0 auto;">
-                <span class="material-symbols-outlined" style="font-size: 48px;">ac_unit</span>
-            </div>
-            <div style="margin-top: 48px; opacity: 0.7;">
-                <p class="body-large">Décembre 2025</p>
+            <p class="headline-medium" style="opacity: 0.9; margin-bottom: 48px;">Quel modèle économique pour réussir notre lancement ?</p>
+            <div style="display: inline-flex; align-items: center; gap: 12px; padding: 16px 28px; background: rgba(255,255,255,0.15); border-radius: 100px;">
+                <span class="material-symbols-outlined" style="font-size: 24px;">target</span>
+                <span class="title-medium">Objectif : Définir comment générer des revenus durables</span>
             </div>
         </div>
     </section>
 
-    <!-- SLIDE 2: The Challenge -->
-    <section class="slide slide-surface" data-chapter="Le Défi">
+    <!-- SLIDE 2: The Real Question -->
+    <section class="slide slide-surface" data-chapter="La Question">
         <div class="slide-content">
-            <div class="slide-label" style="color: var(--md-primary);">Le Défi Central</div>
-            <h2 class="display-small" style="color: var(--md-on-surface); margin-bottom: 32px;">Le Paradoxe du Démarrage</h2>
-            <div class="comparison-grid">
-                <div class="comparison-item comparison-bad">
-                    <div class="icon-container" style="background: var(--md-error); margin-bottom: 16px;">
-                        <span class="material-symbols-outlined" style="color: white;">block</span>
-                    </div>
-                    <h3 class="title-large" style="margin-bottom: 12px; color: var(--md-on-error-container);">Facturer trop tôt</h3>
-                    <p class="body-large" style="color: var(--md-on-error-container);">= Tue la croissance du réseau</p>
-                </div>
-                <div class="comparison-item comparison-good">
-                    <div class="icon-container" style="background: var(--md-success); margin-bottom: 16px;">
-                        <span class="material-symbols-outlined" style="color: white;">money_off</span>
-                    </div>
-                    <h3 class="title-large" style="margin-bottom: 12px; color: var(--md-on-primary-container);">Tout gratuit</h3>
-                    <p class="body-large" style="color: var(--md-on-primary-container);">= Non viable économiquement</p>
-                </div>
+            <div class="step-indicator">
+                <span class="step-number">1</span>
+                <span class="step-label">Comprendre le défi</span>
             </div>
-            <div style="text-align: center; margin-top: 48px; padding: 32px; background: var(--md-primary-container); border-radius: 16px;">
-                <p class="headline-medium" style="color: var(--md-on-primary-container);">
-                    <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 8px;">hub</span>
-                    La valeur dépend de la taille du réseau
-                </p>
-                <p style="margin-top: 12px; color: var(--md-on-primary-container); opacity: 0.8;" class="body-large">Plus de skis enregistrés = plus de chances de retrouver les skis perdus</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 3: Market Size B2C -->
-    <section class="slide slide-primary" data-chapter="Segments Clients">
-        <div class="slide-content" style="text-align: center;">
-            <div class="slide-label">Segment B2C</div>
-            <h2 class="display-small" style="margin-bottom: 24px;">Skieurs Individuels</h2>
-            <div class="big-number">10M</div>
-            <p class="headline-medium" style="opacity: 0.9;">skieurs uniques en France par an</p>
-            <div class="stats-row">
-                <div class="stat-item">
-                    <div class="stat-value">€500-2K</div>
-                    <div class="stat-label">Valeur équipement</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">1-2%</div>
-                    <div class="stat-label">Taux de perte/saison</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value">€5-20</div>
-                    <div class="stat-label">Propension à payer</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 4: Market Size B2B -->
-    <section class="slide slide-surface" data-chapter="Segments Clients">
-        <div class="slide-content">
-            <div class="slide-label" style="color: var(--md-primary);">Segment B2B</div>
-            <h2 class="display-small" style="color: var(--md-on-surface); margin-bottom: 16px;">Magasins de Location</h2>
-            <div class="card-grid">
-                <div class="md-card md-card-filled" style="text-align: center;">
-                    <div class="icon-container" style="background: var(--md-primary-container);">
-                        <span class="material-symbols-outlined" style="color: var(--md-primary);">store</span>
-                    </div>
-                    <div class="card-value" style="color: var(--md-primary);">~2 000</div>
-                    <div class="card-desc">shops dans les Alpes françaises</div>
-                </div>
-                <div class="md-card md-card-filled" style="text-align: center;">
-                    <div class="icon-container" style="background: var(--md-error-container);">
-                        <span class="material-symbols-outlined" style="color: var(--md-error);">trending_down</span>
-                    </div>
-                    <div class="card-value" style="color: var(--md-error);">€15K</div>
-                    <div class="card-desc">pertes moyennes par saison</div>
-                </div>
-                <div class="md-card md-card-filled" style="text-align: center;">
-                    <div class="icon-container" style="background: var(--md-success-container);">
-                        <span class="material-symbols-outlined" style="color: var(--md-success);">savings</span>
-                    </div>
-                    <div class="card-value" style="color: var(--md-success);">€4 500</div>
-                    <div class="card-desc">économies si 30% de récupération</div>
-                </div>
-            </div>
-            <div style="margin-top: 40px; padding: 20px 24px; background: var(--md-primary); color: var(--md-on-primary); border-radius: 12px; display: flex; align-items: center; gap: 16px;">
-                <span class="material-symbols-outlined">lightbulb</span>
-                <p class="body-large">B2B peut payer plus car la valeur est quantifiable en euros</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 5: Future Segments -->
-    <section class="slide slide-secondary" data-chapter="Segments Clients">
-        <div class="slide-content" style="text-align: center;">
-            <div class="slide-label">Opportunités Futures</div>
-            <h2 class="display-small" style="margin-bottom: 32px;">Partenariats Stratégiques</h2>
-            <div class="card-grid" style="max-width: 700px; margin: 0 auto;">
-                <div class="md-card card-on-dark" style="text-align: center;">
-                    <div class="icon-container-large" style="background: rgba(255,255,255,0.15); margin: 0 auto 16px;">
-                        <span class="material-symbols-outlined" style="color: white;">landscape</span>
-                    </div>
-                    <h3 class="title-large" style="margin-bottom: 8px;">Stations de Ski</h3>
-                    <p class="display-small" style="margin: 16px 0;">~350</p>
-                    <p class="body-medium" style="opacity: 0.8;">stations en France</p>
-                    <p style="margin-top: 12px; opacity: 0.6; display: flex; align-items: center; justify-content: center; gap: 4px;" class="body-small">
-                        <span class="material-symbols-outlined" style="font-size: 16px;">schedule</span>
-                        Cycle: 6-12 mois
-                    </p>
-                </div>
-                <div class="md-card card-on-dark" style="text-align: center;">
-                    <div class="icon-container-large" style="background: rgba(255,255,255,0.15); margin: 0 auto 16px;">
-                        <span class="material-symbols-outlined" style="color: white;">security</span>
-                    </div>
-                    <h3 class="title-large" style="margin-bottom: 8px;">Assurances</h3>
-                    <p class="display-small" style="margin: 16px 0;">Massif</p>
-                    <p class="body-medium" style="opacity: 0.8;">potentiel d'adoption</p>
-                    <p style="margin-top: 12px; opacity: 0.6; display: flex; align-items: center; justify-content: center; gap: 4px;" class="body-small">
-                        <span class="material-symbols-outlined" style="font-size: 16px;">schedule</span>
-                        Cycle: 12-24 mois
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 6: Models Overview - Interactive -->
-    <section class="slide slide-surface" data-chapter="Modèles Évalués">
-        <div class="slide-content">
-            <div class="slide-label" style="color: var(--md-primary);">Analyse</div>
-            <h2 class="display-small" style="color: var(--md-on-surface); margin-bottom: 16px;">7 Modèles Évalués</h2>
-            <p class="body-medium" style="color: var(--md-on-surface-variant); margin-bottom: 24px; display: flex; align-items: center; gap: 8px;">
-                <span class="material-symbols-outlined" style="font-size: 18px;">touch_app</span>
-                Cliquez sur un modèle pour voir les détails
+            <h2 class="display-small" style="margin-bottom: 16px;">La question n'est pas "combien facturer"</h2>
+            <p class="body-large" style="color: var(--md-on-surface-variant); margin-bottom: 32px;">
+                La vraie question est : <strong style="color: var(--md-on-surface);">comment générer des revenus sans tuer la croissance de notre réseau ?</strong>
             </p>
-            <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
-                <div class="md-card md-card-outlined model-card" style="padding: 16px; text-align: center; cursor: pointer;" data-model="A">
-                    <div class="label-medium" style="color: var(--md-on-surface-variant); margin-bottom: 8px;">A</div>
-                    <p class="title-medium">Freemium B2C</p>
-                    <p style="color: var(--md-error); margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 4px;" class="body-small">
-                        <span class="material-symbols-outlined" style="font-size: 16px;">close</span> €450/an
-                    </p>
+
+            <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: center;">
+                <div class="md-card md-card-elevated" style="padding: 28px; text-align: center; border: 2px solid var(--md-error);">
+                    <span class="material-symbols-outlined" style="font-size: 44px; color: var(--md-error); margin-bottom: 16px;">block</span>
+                    <h3 class="title-medium" style="color: var(--md-error); margin-bottom: 10px;">Facturer trop tôt</h3>
+                    <p class="body-medium" style="color: var(--md-on-surface-variant);">Tue l'adoption → Réseau vide → Service inutile</p>
                 </div>
-                <div class="md-card md-card-outlined model-card" style="padding: 16px; text-align: center; cursor: pointer;" data-model="B">
-                    <div class="label-medium" style="color: var(--md-on-surface-variant); margin-bottom: 8px;">B</div>
-                    <p class="title-medium">Achat unique</p>
-                    <p style="color: var(--md-tertiary); margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 4px;" class="body-small">
-                        <span class="material-symbols-outlined" style="font-size: 16px;">warning</span> Pas récurrent
-                    </p>
+
+                <div style="text-align: center;">
+                    <span class="material-symbols-outlined" style="font-size: 36px; color: var(--md-outline);">compare_arrows</span>
+                    <p class="label-medium" style="color: var(--md-outline); margin-top: 8px;">Le dilemme</p>
                 </div>
-                <div class="md-card model-card" style="padding: 16px; text-align: center; background: var(--md-success-container); cursor: pointer;" data-model="C">
-                    <div class="label-medium" style="color: var(--md-on-surface-variant); margin-bottom: 8px;">C</div>
-                    <p class="title-medium">Vente Stickers</p>
-                    <p style="color: var(--md-success); margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 4px;" class="body-small">
-                        <span class="material-symbols-outlined filled" style="font-size: 16px;">check_circle</span> €3 400/an
-                    </p>
+
+                <div class="md-card md-card-elevated" style="padding: 28px; text-align: center; border: 2px solid var(--md-error);">
+                    <span class="material-symbols-outlined" style="font-size: 44px; color: var(--md-error); margin-bottom: 16px;">money_off</span>
+                    <h3 class="title-medium" style="color: var(--md-error); margin-bottom: 10px;">Tout gratuit</h3>
+                    <p class="body-medium" style="color: var(--md-on-surface-variant);">Pas de revenus → Non viable → Projet meurt</p>
                 </div>
-                <div class="md-card model-card" style="padding: 16px; text-align: center; background: var(--md-success-container); cursor: pointer;" data-model="D">
-                    <div class="label-medium" style="color: var(--md-on-surface-variant); margin-bottom: 8px;">D</div>
-                    <p class="title-medium">SaaS B2B</p>
-                    <p style="color: var(--md-success); margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 4px;" class="body-small">
-                        <span class="material-symbols-outlined filled" style="font-size: 16px;">check_circle</span> Scale bien
-                    </p>
-                </div>
-                <div class="md-card md-card-outlined model-card" style="padding: 16px; text-align: center; cursor: pointer;" data-model="E">
-                    <div class="label-medium" style="color: var(--md-on-surface-variant); margin-bottom: 8px;">E</div>
-                    <p class="title-medium">Frais succès</p>
-                    <p style="color: var(--md-tertiary); margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 4px;" class="body-small">
-                        <span class="material-symbols-outlined" style="font-size: 16px;">warning</span> Complément
-                    </p>
-                </div>
-                <div class="md-card md-card-outlined model-card" style="padding: 16px; text-align: center; cursor: pointer;" data-model="F">
-                    <div class="label-medium" style="color: var(--md-on-surface-variant); margin-bottom: 8px;">F</div>
-                    <p class="title-medium">Assurances</p>
-                    <p style="color: var(--md-on-surface-variant); margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 4px;" class="body-small">
-                        <span class="material-symbols-outlined" style="font-size: 16px;">event</span> An 2-3
-                    </p>
-                </div>
-                <div class="md-card md-card-outlined model-card" style="padding: 16px; text-align: center; cursor: pointer;" data-model="G">
-                    <div class="label-medium" style="color: var(--md-on-surface-variant); margin-bottom: 8px;">G</div>
-                    <p class="title-medium">Stations</p>
-                    <p style="color: var(--md-on-surface-variant); margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 4px;" class="body-small">
-                        <span class="material-symbols-outlined" style="font-size: 16px;">event</span> An 2-3
-                    </p>
+            </div>
+
+            <div class="logic-connector">
+                <span class="material-symbols-outlined">lightbulb</span>
+                <div>
+                    <p class="body-large"><strong>Notre défi :</strong> Trouver un modèle qui permet la croissance du réseau ET génère des revenus.</p>
+                    <p class="body-medium" style="margin-top: 8px; opacity: 0.8;">→ Les deux ne sont pas incompatibles, mais il faut être stratégique.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Modal Dialog for Model Details -->
+    <!-- SLIDE 3: Why Network Matters -->
+    <section class="slide slide-dark" data-chapter="La Question">
+        <div class="slide-content" style="text-align: center;">
+            <div class="step-indicator">
+                <span class="step-number">2</span>
+                <span class="step-label">Pourquoi le réseau est critique</span>
+            </div>
+            <h2 class="display-small" style="margin-bottom: 16px;">Notre service a une particularité</h2>
+            <p class="headline-medium" style="opacity: 0.85; margin-bottom: 16px;">Plus il y a de skis enregistrés, plus le service a de valeur</p>
+            <p class="body-large" style="opacity: 0.65; margin-bottom: 40px;">C'est ce qu'on appelle un "effet réseau" — et c'est notre avantage concurrentiel.</p>
+
+            <div class="flow-horizontal">
+                <div class="flow-box">
+                    <div class="flow-box-label">Peu de skis</div>
+                    <div class="flow-box-value">~5% récupération</div>
+                </div>
+                <span class="material-symbols-outlined flow-arrow">arrow_forward</span>
+                <div class="flow-box">
+                    <div class="flow-box-label">1 000 skis</div>
+                    <div class="flow-box-value">~15% récupération</div>
+                </div>
+                <span class="material-symbols-outlined flow-arrow">arrow_forward</span>
+                <div class="flow-box">
+                    <div class="flow-box-label">10 000+ skis</div>
+                    <div class="flow-box-value">~35% récupération</div>
+                </div>
+            </div>
+
+            <div class="conclusion-box" style="max-width: 750px; margin: 48px auto 0;">
+                <p class="title-large" style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+                    <span class="material-symbols-outlined">hub</span>
+                    Conclusion : L'effet réseau EST notre produit. Bloquer l'adoption = se tirer une balle dans le pied.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 2: NOS CONTRAINTES - Ce que le modèle DOIT respecter -->
+    <!-- ============================================================ -->
+
+    <!-- SLIDE 4: Our Non-Negotiables -->
+    <section class="slide slide-surface" data-chapter="Nos Contraintes">
+        <div class="slide-content">
+            <div class="step-indicator">
+                <span class="step-number">3</span>
+                <span class="step-label">Définir nos critères</span>
+            </div>
+            <h2 class="display-small" style="margin-bottom: 16px;">Avant de choisir un modèle...</h2>
+            <p class="body-large" style="color: var(--md-on-surface-variant); margin-bottom: 28px;">
+                Définissons les critères <strong>non-négociables</strong> que notre modèle économique doit respecter.
+            </p>
+
+            <div class="constraint-card">
+                <div class="constraint-icon" style="background: var(--md-primary-container);">
+                    <span class="material-symbols-outlined" style="color: var(--md-primary);">group_add</span>
+                </div>
+                <div class="constraint-content">
+                    <h4>1. Ne pas bloquer l'adoption</h4>
+                    <p>Les utilisateurs doivent pouvoir utiliser le service gratuitement. Le prix ne doit jamais être une barrière à l'entrée.</p>
+                </div>
+            </div>
+
+            <div class="constraint-card">
+                <div class="constraint-icon" style="background: var(--md-success-container);">
+                    <span class="material-symbols-outlined" style="color: var(--md-success);">payments</span>
+                </div>
+                <div class="constraint-content">
+                    <h4>2. Générer des revenus dès l'An 1</h4>
+                    <p>Nous n'avons pas de levée de fonds. Nous devons prouver la viabilité économique avec des revenus réels, pas des promesses.</p>
+                </div>
+            </div>
+
+            <div class="constraint-card">
+                <div class="constraint-icon" style="background: var(--md-secondary-container);">
+                    <span class="material-symbols-outlined" style="color: var(--md-secondary);">autorenew</span>
+                </div>
+                <div class="constraint-content">
+                    <h4>3. Favoriser les revenus récurrents</h4>
+                    <p>Des revenus prévisibles permettent de planifier, d'investir, et de construire sereinement sur le long terme.</p>
+                </div>
+            </div>
+
+            <div class="constraint-card">
+                <div class="constraint-icon" style="background: var(--md-tertiary-container);">
+                    <span class="material-symbols-outlined" style="color: var(--md-tertiary);">rocket_launch</span>
+                </div>
+                <div class="constraint-content">
+                    <h4>4. Pouvoir scaler</h4>
+                    <p>Le modèle doit fonctionner aussi bien avec 1 000 utilisateurs qu'avec 100 000. Pas de goulots d'étranglement.</p>
+                </div>
+            </div>
+
+            <div class="logic-connector">
+                <span class="material-symbols-outlined">arrow_forward</span>
+                <div>
+                    <p class="body-large"><strong>Prochaine étape :</strong> Évaluer chaque modèle possible contre ces 4 critères.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 3: ÉVALUATION - Passer les 7 modèles au crible       -->
+    <!-- ============================================================ -->
+
+    <!-- SLIDE 5: 7 Models Overview -->
+    <section class="slide slide-surface" data-chapter="Évaluation">
+        <div class="slide-content">
+            <div class="step-indicator">
+                <span class="step-number">4</span>
+                <span class="step-label">Explorer les options</span>
+            </div>
+            <h2 class="display-small" style="margin-bottom: 16px; text-align: center;">7 modèles de revenus possibles</h2>
+            <p class="body-large" style="opacity: 0.8; margin-bottom: 8px; text-align: center;">Passons chaque option au crible de nos 4 critères</p>
+            <p class="body-medium" style="opacity: 0.75; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 32px; padding: 12px 20px; background: rgba(69, 153, 138, 0.08); border-radius: 24px; width: fit-content; margin-left: auto; margin-right: auto; color: var(--md-primary); font-weight: 500; animation: subtleGlow 3s ease-in-out infinite;">
+                <span class="material-symbols-outlined" style="font-size: 20px; animation: pulse 2s infinite;">touch_app</span> Cliquez sur un modèle pour voir les détails
+            </p>
+
+            <!-- Rejected/Limited Models -->
+            <div style="margin-bottom: 24px;">
+                <p class="label-medium" style="opacity: 0.5; margin-bottom: 12px; padding-left: 4px;">Modèles écartés ou limités pour l'An 1</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px;">
+                    <div class="model-card" style="background: #FFFFFF; border-radius: 12px; padding: 20px 14px; text-align: center; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.15);" data-model="A">
+                        <div style="font-size: 0.6875rem; font-weight: 500; color: #9CA3AF; margin-bottom: 6px;">A</div>
+                        <p style="font-size: 0.875rem; font-weight: 500; color: #1F2937; margin-bottom: 12px;">Freemium B2C</p>
+                        <span style="font-size: 0.6875rem; padding: 4px 10px; border-radius: 100px; background: #FEE2E2; color: #DC2626; font-weight: 500;">✗ Éliminé</span>
+                    </div>
+                    <div class="model-card" style="background: #FFFFFF; border-radius: 12px; padding: 20px 14px; text-align: center; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.15);" data-model="B">
+                        <div style="font-size: 0.6875rem; font-weight: 500; color: #9CA3AF; margin-bottom: 6px;">B</div>
+                        <p style="font-size: 0.875rem; font-weight: 500; color: #1F2937; margin-bottom: 12px;">Achat Unique</p>
+                        <span style="font-size: 0.6875rem; padding: 4px 10px; border-radius: 100px; background: #FEF3C7; color: #D97706; font-weight: 500;">~ Limité</span>
+                    </div>
+                    <div class="model-card" style="background: #FFFFFF; border-radius: 12px; padding: 20px 14px; text-align: center; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.15);" data-model="E">
+                        <div style="font-size: 0.6875rem; font-weight: 500; color: #9CA3AF; margin-bottom: 6px;">E</div>
+                        <p style="font-size: 0.875rem; font-weight: 500; color: #1F2937; margin-bottom: 12px;">Frais Succès</p>
+                        <span style="font-size: 0.6875rem; padding: 4px 10px; border-radius: 100px; background: #FEF3C7; color: #D97706; font-weight: 500;">~ Complément</span>
+                    </div>
+                    <div class="model-card" style="background: #FFFFFF; border-radius: 12px; padding: 20px 14px; text-align: center; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.15);" data-model="F">
+                        <div style="font-size: 0.6875rem; font-weight: 500; color: #9CA3AF; margin-bottom: 6px;">F</div>
+                        <p style="font-size: 0.875rem; font-weight: 500; color: #1F2937; margin-bottom: 12px;">Assurances</p>
+                        <span style="font-size: 0.6875rem; padding: 4px 10px; border-radius: 100px; background: #DBEAFE; color: #2563EB; font-weight: 500;">→ An 2-3</span>
+                    </div>
+                    <div class="model-card" style="background: #FFFFFF; border-radius: 12px; padding: 20px 14px; text-align: center; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.15);" data-model="G">
+                        <div style="font-size: 0.6875rem; font-weight: 500; color: #9CA3AF; margin-bottom: 6px;">G</div>
+                        <p style="font-size: 0.875rem; font-weight: 500; color: #1F2937; margin-bottom: 12px;">Stations</p>
+                        <span style="font-size: 0.6875rem; padding: 4px 10px; border-radius: 100px; background: #DBEAFE; color: #2563EB; font-weight: 500;">→ An 2-3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Winning Models -->
+            <div>
+                <p class="label-medium" style="opacity: 0.5; margin-bottom: 12px; padding-left: 4px;">✓ Modèles retenus pour l'An 1</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; max-width: 100%;">
+                    <div class="model-card" style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border: 2px solid #10B981; border-radius: 12px; padding: 24px 18px; text-align: center; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);" data-model="C">
+                        <div style="font-size: 0.6875rem; font-weight: 500; color: #059669; margin-bottom: 6px;">C</div>
+                        <p style="font-size: 1rem; font-weight: 600; color: #065F46; margin-bottom: 12px;">Stickers QR</p>
+                        <span style="font-size: 0.75rem; padding: 5px 14px; border-radius: 100px; background: #10B981; color: #FFFFFF; font-weight: 500;">✓ Retenu</span>
+                    </div>
+                    <div class="model-card" style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border: 2px solid #10B981; border-radius: 12px; padding: 24px 18px; text-align: center; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);" data-model="D">
+                        <div style="font-size: 0.6875rem; font-weight: 500; color: #059669; margin-bottom: 6px;">D</div>
+                        <p style="font-size: 1rem; font-weight: 600; color: #065F46; margin-bottom: 12px;">SaaS B2B</p>
+                        <span style="font-size: 0.75rem; padding: 5px 14px; border-radius: 100px; background: #10B981; color: #FFFFFF; font-weight: 500;">✓ Retenu</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logic-connector" style="max-width: 700px; margin: 40px auto 0; background: rgba(255,255,255,0.08); border-left-color: rgba(255,255,255,0.3);">
+                <span class="material-symbols-outlined">psychology</span>
+                <div>
+                    <p class="body-large"><strong>Question clé :</strong> Pourquoi certains passent et d'autres non ?</p>
+                    <p class="body-medium" style="margin-top: 4px; opacity: 0.7;">→ Voyons le raisonnement détaillé sur la slide suivante.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Model Details -->
     <div class="modal-overlay" id="modelModal">
         <div class="modal-dialog">
             <div class="modal-header">
-                <div class="modal-icon" id="modalIcon">
-                    <span class="material-symbols-outlined">info</span>
-                </div>
+                <div class="modal-icon" id="modalIcon"><span class="material-symbols-outlined">info</span></div>
                 <div>
                     <div class="label-medium" style="color: var(--md-on-surface-variant);" id="modalLabel">MODÈLE A</div>
-                    <h3 class="headline-small" id="modalTitle">Titre du modèle</h3>
+                    <h3 class="title-large" id="modalTitle">Titre</h3>
                 </div>
-                <button class="modal-close" onclick="closeModal()">
-                    <span class="material-symbols-outlined">close</span>
-                </button>
+                <button class="modal-close" onclick="closeModal()"><span class="material-symbols-outlined">close</span></button>
             </div>
             <div class="modal-content">
                 <div class="modal-section">
-                    <h4 class="title-small" style="color: var(--md-primary); margin-bottom: 8px;">
-                        <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: text-bottom;">settings</span>
-                        Fonctionnement
+                    <h4 class="title-medium" style="color: var(--md-primary); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">settings</span> Comment ça marche
                     </h4>
-                    <p class="body-medium" id="modalDescription">Description du modèle</p>
+                    <p class="body-medium" id="modalDescription"></p>
                 </div>
                 <div class="modal-divider"></div>
                 <div class="modal-section">
-                    <h4 class="title-small" style="color: var(--md-success); margin-bottom: 8px;">
-                        <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: text-bottom;">add_circle</span>
-                        Avantages
+                    <h4 class="title-medium" style="color: var(--md-success); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">add_circle</span> Avantages
                     </h4>
                     <ul class="modal-list" id="modalPros"></ul>
                 </div>
                 <div class="modal-divider"></div>
                 <div class="modal-section">
-                    <h4 class="title-small" style="color: var(--md-error); margin-bottom: 8px;">
-                        <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: text-bottom;">remove_circle</span>
-                        Inconvénients
+                    <h4 class="title-medium" style="color: var(--md-error); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        <span class="material-symbols-outlined" style="font-size: 20px;">remove_circle</span> Inconvénients
                     </h4>
                     <ul class="modal-list" id="modalCons"></ul>
                 </div>
@@ -1622,7 +583,7 @@
                     <div class="modal-stat">
                         <span class="material-symbols-outlined">payments</span>
                         <div>
-                            <div class="label-small" style="color: var(--md-on-surface-variant);">Projection An 1</div>
+                            <div style="font-size: 0.6875rem; color: var(--md-on-surface-variant);">Projection An 1</div>
                             <div class="title-medium" id="modalRevenue">€0</div>
                         </div>
                     </div>
@@ -1635,806 +596,696 @@
         </div>
     </div>
 
-    <!-- SLIDE 7: Sticker Economics -->
-    <section class="slide slide-primary" data-chapter="Modèles Évalués">
+    <!-- SLIDE 6: Filtering Logic -->
+    <section class="slide slide-surface" data-chapter="Évaluation">
         <div class="slide-content">
-            <div class="slide-label">Modèle C - Détail</div>
-            <h2 class="display-small" style="margin-bottom: 32px;">Économie des Stickers</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px;">
+            <div class="step-indicator">
+                <span class="step-number">5</span>
+                <span class="step-label">Appliquer nos filtres</span>
+            </div>
+            <h2 class="display-small" style="margin-bottom: 16px;">Pourquoi chaque modèle passe ou échoue</h2>
+            <p class="body-large" style="color: var(--md-on-surface-variant); margin-bottom: 24px;">
+                Voici le raisonnement derrière chaque verdict :
+            </p>
+
+            <div class="filter-row fails">
+                <span class="filter-name">A. Freemium B2C</span>
+                <span class="filter-reason">Taux de conversion 2-5% → besoin de 10K+ users pour revenus significatifs → irréaliste en An 1</span>
+                <span class="filter-verdict fail"><span class="material-symbols-outlined" style="font-size: 14px;">close</span> Éliminé</span>
+            </div>
+
+            <div class="filter-row partial">
+                <span class="filter-name">B. Achat unique</span>
+                <span class="filter-reason">Pas de revenus récurrents → échoue critère #3 → difficile de planifier long terme</span>
+                <span class="filter-verdict maybe"><span class="material-symbols-outlined" style="font-size: 14px;">warning</span> Limité</span>
+            </div>
+
+            <div class="filter-row partial">
+                <span class="filter-name">E. Frais succès</span>
+                <span class="filter-reason">Revenus imprévisibles → échoue critère #3 → bon complément mais pas pilier principal</span>
+                <span class="filter-verdict maybe"><span class="material-symbols-outlined" style="font-size: 14px;">info</span> Complément</span>
+            </div>
+
+            <div class="filter-row future">
+                <span class="filter-name">F. Assurances</span>
+                <span class="filter-reason">Cycle commercial 12-24 mois → échoue critère #2 pour An 1 → reporter à An 2-3</span>
+                <span class="filter-verdict later"><span class="material-symbols-outlined" style="font-size: 14px;">event</span> An 2-3</span>
+            </div>
+
+            <div class="filter-row future">
+                <span class="filter-name">G. Stations</span>
+                <span class="filter-reason">Besoin de prouver le concept d'abord → échoue critère #2 pour An 1 → reporter à An 2-3</span>
+                <span class="filter-verdict later"><span class="material-symbols-outlined" style="font-size: 14px;">event</span> An 2-3</span>
+            </div>
+
+            <div class="filter-row passes">
+                <span class="filter-name">C. Stickers QR</span>
+                <span class="filter-reason">App gratuite (✓ critère #1) + produit payant (✓ #2) + scalable (✓ #4) → PASSE TOUS LES CRITÈRES</span>
+                <span class="filter-verdict pass"><span class="material-symbols-outlined" style="font-size: 14px;">check</span> Retenu</span>
+            </div>
+
+            <div class="filter-row passes">
+                <span class="filter-name">D. SaaS B2B</span>
+                <span class="filter-reason">Revenus récurrents (✓ #3) + ROI quantifiable + scalable (✓ #4) → PASSE TOUS LES CRITÈRES</span>
+                <span class="filter-verdict pass"><span class="material-symbols-outlined" style="font-size: 14px;">check</span> Retenu</span>
+            </div>
+
+            <div class="logic-connector">
+                <span class="material-symbols-outlined">arrow_forward</span>
                 <div>
-                    <h3 class="title-large" style="margin-bottom: 24px; opacity: 0.9; display: flex; align-items: center; gap: 12px;">
-                        <span class="material-symbols-outlined">inventory_2</span>
-                        Pack de 4 stickers
-                    </h3>
-                    <div style="background: rgba(255,255,255,0.1); border-radius: 16px; padding: 24px;">
-                        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.15);" class="body-large">
-                            <span>Prix de vente</span>
-                            <span style="font-weight: 500;">€10.00</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.15); opacity: 0.8;" class="body-large">
-                            <span>Production (4×€0.25)</span>
-                            <span>-€1.00</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.15); opacity: 0.8;" class="body-large">
-                            <span>Emballage + Livraison</span>
-                            <span>-€2.00</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.15); opacity: 0.8;" class="body-large">
-                            <span>Paiement (Stripe)</span>
-                            <span>-€0.30</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; padding: 16px 0; font-weight: 500; color: var(--md-success-container);" class="title-large">
-                            <span>Marge nette</span>
-                            <span>€6.70</span>
-                        </div>
-                    </div>
-                </div>
-                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                    <div class="big-stat" style="color: var(--md-success-container);">67%</div>
-                    <p class="title-large" style="margin-top: 12px;">marge brute</p>
-                    <div style="margin-top: 32px; padding: 20px; background: rgba(184, 243, 151, 0.2); border-radius: 12px; text-align: left;">
-                        <p style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;" class="body-large">
-                            <span class="material-symbols-outlined filled">check_circle</span> Résout la logistique
-                        </p>
-                        <p style="display: flex; align-items: center; gap: 8px;" class="body-large">
-                            <span class="material-symbols-outlined filled">check_circle</span> Génère des revenus
-                        </p>
-                    </div>
+                    <p class="body-large"><strong>Conclusion :</strong> Deux modèles passent tous nos critères pour An 1 : <strong style="color: var(--md-success);">Stickers (C)</strong> et <strong style="color: var(--md-success);">SaaS B2B (D)</strong>.</p>
+                    <p class="body-medium" style="margin-top: 8px; opacity: 0.8;">→ Analysons-les en détail pour comprendre pourquoi ils fonctionnent.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SLIDE 8: Recommended Strategy -->
-    <section class="slide" style="background: linear-gradient(135deg, #45998A 0%, #6DBBAA 100%); color: white;" data-chapter="Stratégie Recommandée">
-        <div class="slide-content" style="text-align: center;">
-            <div class="slide-label">Solution</div>
-            <h2 class="display-small" style="margin-bottom: 16px;">Le Modèle Hybride</h2>
-            <p class="headline-medium" style="opacity: 0.9;">La meilleure combinaison pour croissance et revenus</p>
-            <div class="flow-diagram">
-                <div class="flow-box">
-                    <div class="flow-box-title">Skieurs</div>
-                    <div class="flow-box-value">GRATUIT</div>
-                </div>
-                <div class="flow-arrow">
-                    <span class="material-symbols-outlined">add</span>
-                </div>
-                <div class="flow-box">
-                    <div class="flow-box-title">Stickers</div>
-                    <div class="flow-box-value">€10/pack</div>
-                </div>
-                <div class="flow-arrow">
-                    <span class="material-symbols-outlined">add</span>
-                </div>
-                <div class="flow-box">
-                    <div class="flow-box-title">Shops B2B</div>
-                    <div class="flow-box-value">€19-119/mois</div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- ============================================================ -->
+    <!-- SECTION 4: OPTIONS VIABLES - Deep dive sur C et D            -->
+    <!-- ============================================================ -->
 
-    <!-- SLIDE 9: Why It Works -->
-    <section class="slide slide-surface" data-chapter="Stratégie Recommandée">
+    <!-- SLIDE 7: Stickers Deep Dive -->
+    <section class="slide slide-surface" data-chapter="Options Viables">
         <div class="slide-content">
-            <div class="slide-label" style="color: var(--md-primary);">Pourquoi ça marche</div>
-            <h2 class="display-small" style="color: var(--md-on-surface); margin-bottom: 24px;">4 Piliers du Succès</h2>
-            <div class="card-grid">
-                <div class="md-card md-card-elevated">
+            <div class="step-indicator">
+                <span class="step-number">6</span>
+                <span class="step-label">Analyser : Stickers</span>
+            </div>
+            <h2 class="display-small" style="margin-bottom: 8px;">Option C : Vente de Stickers QR</h2>
+            <p class="body-large" style="opacity: 0.85; margin-bottom: 28px;">L'application reste 100% gratuite. Les stickers physiques génèrent les revenus.</p>
+
+            <div class="two-col">
+                <div>
+                    <h3 class="title-large" style="margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
+                        <span class="material-symbols-outlined">calculate</span> Économie unitaire (pack de 4)
+                    </h3>
+                    <div style="background: rgba(255,255,255,0.1); border-radius: var(--md-shape-medium); padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.15);">
+                            <span>Prix de vente</span><span style="font-weight: 500;">€10.00</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.15); opacity: 0.8;">
+                            <span>− Production stickers</span><span>€1.00</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.15); opacity: 0.8;">
+                            <span>− Emballage + Envoi</span><span>€2.00</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.15); opacity: 0.8;">
+                            <span>− Frais Stripe (3%)</span><span>€0.30</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 14px 0; font-weight: 500; font-size: 1.125rem; color: var(--md-success-container);">
+                            <span>= Marge nette</span><span>€6.70</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                    <div class="big-stat" style="color: var(--md-success-container);">67%</div>
+                    <p class="title-large" style="margin-top: 8px; opacity: 0.9;">marge brute</p>
+
+                    <div style="margin-top: 32px; text-align: left;">
+                        <p class="body-medium" style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                            <span class="material-symbols-outlined filled" style="color: var(--md-success-container);">check_circle</span>
+                            <span>✓ Critère #1 : App reste gratuite</span>
+                        </p>
+                        <p class="body-medium" style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                            <span class="material-symbols-outlined filled" style="color: var(--md-success-container);">check_circle</span>
+                            <span>✓ Critère #2 : Revenus immédiats</span>
+                        </p>
+                        <p class="body-medium" style="display: flex; align-items: center; gap: 10px;">
+                            <span class="material-symbols-outlined filled" style="color: var(--md-success-container);">check_circle</span>
+                            <span>✓ Critère #4 : Scalable (stock)</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logic-connector" style="background: rgba(255,255,255,0.1); border-left-color: rgba(255,255,255,0.4);">
+                <span class="material-symbols-outlined">lightbulb</span>
+                <div>
+                    <p class="body-large"><strong>Pourquoi ça marche :</strong> Le sticker est une valeur ajoutée tangible, pas une "taxe" sur le service gratuit. L'utilisateur paie pour quelque chose de physique et utile.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 8: SaaS B2B Deep Dive -->
+    <section class="slide slide-surface" data-chapter="Options Viables">
+        <div class="slide-content">
+            <div class="step-indicator">
+                <span class="step-number">7</span>
+                <span class="step-label">Analyser : SaaS B2B</span>
+            </div>
+            <h2 class="display-small" style="margin-bottom: 8px;">Option D : SaaS pour magasins de location</h2>
+            <p class="body-large" style="color: var(--md-on-surface-variant); margin-bottom: 28px;">Les shops payent un abonnement mensuel pour tracker leurs skis et réduire leurs pertes.</p>
+
+            <div class="two-col">
+                <div>
+                    <h3 class="title-large" style="margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
+                        <span class="material-symbols-outlined" style="color: var(--md-primary);">store</span> Le problème des shops
+                    </h3>
+
+                    <div class="md-card md-card-filled" style="padding: 20px; margin-bottom: 16px; border-left: 4px solid var(--md-error);">
+                        <p class="title-medium" style="color: var(--md-error); margin-bottom: 8px;">Pertes actuelles</p>
+                        <p class="body-medium" style="color: var(--md-on-surface-variant);">Un shop moyen perd <strong>10+ paires de skis/saison</strong> (échanges accidentels, vols). Coût : <strong>jusqu'à €15 000/saison</strong>.</p>
+                    </div>
+
+                    <div class="md-card md-card-filled" style="padding: 20px; border-left: 4px solid var(--md-success);">
+                        <p class="title-medium" style="color: var(--md-success); margin-bottom: 8px;">Notre proposition</p>
+                        <p class="body-medium" style="color: var(--md-on-surface-variant);">Pour <strong>€59/mois</strong>, tracker tous leurs skis. S'ils récupèrent <strong>2-3 paires</strong>, c'est rentabilisé.</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+                    <div class="label-medium" style="color: var(--md-on-surface-variant);">Ratio LTV:CAC</div>
+                    <div class="big-stat" style="color: var(--md-success);">4:1</div>
+                    <p class="body-large" style="margin-top: 8px; color: var(--md-on-surface-variant);">Excellent pour SaaS</p>
+
+                    <div style="margin-top: 32px; text-align: left;">
+                        <p class="body-medium" style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: var(--md-on-surface);">
+                            <span class="material-symbols-outlined filled" style="color: var(--md-success);">check_circle</span>
+                            <span>✓ Critère #3 : Revenus récurrents</span>
+                        </p>
+                        <p class="body-medium" style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: var(--md-on-surface);">
+                            <span class="material-symbols-outlined filled" style="color: var(--md-success);">check_circle</span>
+                            <span>✓ Critère #4 : Très scalable</span>
+                        </p>
+                        <p class="body-medium" style="display: flex; align-items: center; gap: 10px; color: var(--md-on-surface);">
+                            <span class="material-symbols-outlined filled" style="color: var(--md-success);">check_circle</span>
+                            <span>✓ ROI facile à démontrer</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logic-connector">
+                <span class="material-symbols-outlined">lightbulb</span>
+                <div>
+                    <p class="body-large"><strong>Pourquoi ça marche :</strong> Les shops ont un problème réel (pertes financières) et notre solution a un ROI mesurable. Ce n'est pas un "nice to have", c'est un outil qui leur fait économiser de l'argent.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 5: RECOMMANDATION - Le modèle hybride                -->
+    <!-- ============================================================ -->
+
+    <!-- SLIDE 9: The Hybrid Model -->
+    <section class="slide slide-surface" data-chapter="Recommandation">
+        <div class="slide-content" style="text-align: center;">
+            <div class="step-indicator">
+                <span class="step-number">8</span>
+                <span class="step-label">Notre recommandation</span>
+            </div>
+            <h2 class="display-small" style="margin-bottom: 16px;">Le Modèle Hybride</h2>
+            <p class="headline-medium" style="opacity: 0.9; margin-bottom: 8px;">Combinons les deux options gagnantes</p>
+            <p class="body-large" style="opacity: 0.75;">Chacune compense les faiblesses de l'autre</p>
+
+            <div class="flow-horizontal" style="margin-top: 48px;">
+                <div class="flow-box" style="min-width: 160px;">
+                    <div class="flow-box-label">Fondation</div>
+                    <div class="flow-box-value">App 100% Gratuite</div>
+                    <p style="font-size: 0.75rem; opacity: 0.7; margin-top: 8px;">→ Maximise le réseau</p>
+                </div>
+                <span class="material-symbols-outlined flow-arrow">add</span>
+                <div class="flow-box" style="min-width: 160px;">
+                    <div class="flow-box-label">Revenu B2C</div>
+                    <div class="flow-box-value">Stickers €10</div>
+                    <p style="font-size: 0.75rem; opacity: 0.7; margin-top: 8px;">→ Cash flow + marge 67%</p>
+                </div>
+                <span class="material-symbols-outlined flow-arrow">add</span>
+                <div class="flow-box" style="min-width: 160px;">
+                    <div class="flow-box-label">Revenu B2B</div>
+                    <div class="flow-box-value">SaaS €19-119/m</div>
+                    <p style="font-size: 0.75rem; opacity: 0.7; margin-top: 8px;">→ Récurrent + scalable</p>
+                </div>
+            </div>
+
+            <div class="conclusion-box" style="max-width: 700px; margin: 48px auto 0; background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4);">
+                <p class="title-large" style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+                    <span class="material-symbols-outlined">psychology</span>
+                    Logique : Réseau gratuit pour la valeur + Monétisation sur la valeur ajoutée
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 10: Why This Combination Works -->
+    <section class="slide slide-surface" data-chapter="Recommandation">
+        <div class="slide-content">
+            <div class="step-indicator">
+                <span class="step-number">9</span>
+                <span class="step-label">Pourquoi cette combinaison</span>
+            </div>
+            <h2 class="display-small" style="margin-bottom: 16px;">Les 3 piliers du modèle</h2>
+            <p class="body-large" style="color: var(--md-on-surface-variant); margin-bottom: 32px;">
+                Chaque composant joue un rôle spécifique et stratégique.
+            </p>
+
+            <div class="card-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="md-card md-card-elevated" style="padding: 24px;">
                     <div class="card-icon" style="background: var(--md-primary-container);">
                         <span class="material-symbols-outlined" style="color: var(--md-primary);">public</span>
                     </div>
-                    <h3 class="card-title">B2C Gratuit</h3>
-                    <p class="card-desc">Construit l'effet réseau. Le réseau EST le produit. 1000 users gratuits > 100 payants</p>
+                    <h3 class="card-title">1. App Gratuite</h3>
+                    <p class="label-large" style="color: var(--md-primary); margin-bottom: 12px;">Rôle : Croissance</p>
+                    <p class="card-desc">Maximise l'adoption. 1000 users gratuits créent plus de valeur que 100 users payants. L'effet réseau est notre avantage compétitif.</p>
                 </div>
-                <div class="md-card md-card-elevated">
+
+                <div class="md-card md-card-elevated" style="padding: 24px;">
                     <div class="card-icon" style="background: var(--md-success-container);">
                         <span class="material-symbols-outlined" style="color: var(--md-success);">qr_code_2</span>
                     </div>
-                    <h3 class="card-title">Stickers Payants</h3>
-                    <p class="card-desc">Génère des revenus sans bloquer l'adoption. Marge 67%.</p>
+                    <h3 class="card-title">2. Stickers B2C</h3>
+                    <p class="label-large" style="color: var(--md-success); margin-bottom: 12px;">Rôle : Cash Flow</p>
+                    <p class="card-desc">Génère des revenus SANS bloquer l'adoption. Valeur tangible, marge élevée (67%), et crée une barrière concurrentielle.</p>
                 </div>
-                <div class="md-card md-card-elevated">
-                    <div class="card-icon" style="background: var(--md-tertiary-container);">
-                        <span class="material-symbols-outlined" style="color: var(--md-tertiary);">business</span>
-                    </div>
-                    <h3 class="card-title">B2B Finance</h3>
-                    <p class="card-desc">LTV élevée, CAC faible à l'échelle. Ratio LTV:CAC de 4:1</p>
-                </div>
-                <div class="md-card md-card-elevated">
+
+                <div class="md-card md-card-elevated" style="padding: 24px;">
                     <div class="card-icon" style="background: var(--md-secondary-container);">
-                        <span class="material-symbols-outlined" style="color: var(--md-secondary);">handshake</span>
+                        <span class="material-symbols-outlined" style="color: var(--md-secondary);">business</span>
                     </div>
-                    <h3 class="card-title">Partenariats</h3>
-                    <p class="card-desc">Assurances et stations pour scaler en An 2-3</p>
+                    <h3 class="card-title">3. SaaS B2B</h3>
+                    <p class="label-large" style="color: var(--md-secondary); margin-bottom: 12px;">Rôle : Stabilité</p>
+                    <p class="card-desc">Revenus récurrents et prévisibles. ROI facile à prouver aux shops. Base solide pour scaler en An 2-3.</p>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- SLIDE 10: Phase 1 -->
-    <section class="slide slide-primary" data-chapter="Phases">
-        <div class="slide-content">
-            <div class="slide-label">Phase 1 - Année 1</div>
-            <h2 class="display-small" style="margin-bottom: 32px;">Construction du Réseau</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px;">
+            <div class="logic-connector">
+                <span class="material-symbols-outlined">verified</span>
                 <div>
-                    <h3 class="title-large" style="margin-bottom: 24px; opacity: 0.9; display: flex; align-items: center; gap: 12px;">
-                        <span class="material-symbols-outlined">flag</span>
-                        Objectif Principal
-                    </h3>
-                    <p class="headline-medium" style="margin-bottom: 32px;">Maximiser l'adoption, prouver le concept</p>
-                    <ul class="feature-list">
-                        <li><span class="material-symbols-outlined">person</span> Skieurs individuels: GRATUIT</li>
-                        <li><span class="material-symbols-outlined">qr_code</span> Packs stickers: €10</li>
-                        <li><span class="material-symbols-outlined">storefront</span> Shops Starter: GRATUIT (30 skis)</li>
-                        <li><span class="material-symbols-outlined">store</span> Shops Pro: €39/mois</li>
-                    </ul>
-                </div>
-                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                    <div class="slide-label">Objectif Revenus</div>
-                    <div class="big-stat">€5-10K</div>
-                    <div style="margin-top: 32px; background: rgba(255,255,255,0.15); border-radius: 16px; padding: 24px; width: 100%;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px; align-items: center;" class="body-large">
-                            <span style="display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 20px;">qr_code_2</span> Stickers</span>
-                            <span style="font-weight: 500;">€3-5K</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px; align-items: center;" class="body-large">
-                            <span style="display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 20px;">store</span> Shop Pro</span>
-                            <span style="font-weight: 500;">€1.5-4K</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center;" class="body-large">
-                            <span style="display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 20px;">volunteer_activism</span> Tips/Autres</span>
-                            <span style="font-weight: 500;">€0.5-1K</span>
-                        </div>
-                    </div>
+                    <p class="body-large"><strong>Résultat :</strong> Un modèle qui respecte nos 4 contraintes ET crée des revenus diversifiés (B2C + B2B).</p>
+                    <p class="body-medium" style="margin-top: 8px; opacity: 0.8;">→ Voyons maintenant les détails financiers.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SLIDE 11: Phase 2 -->
-    <section class="slide slide-surface" data-chapter="Phases">
+    <!-- ============================================================ -->
+    <!-- SECTION 6: FINANCES - Les chiffres                           -->
+    <!-- ============================================================ -->
+
+    <!-- SLIDE 11: Shop Pricing -->
+    <section class="slide slide-surface" data-chapter="Finances">
         <div class="slide-content">
-            <div class="slide-label" style="color: var(--md-primary);">Phase 2 - Année 2</div>
-            <h2 class="display-small" style="color: var(--md-on-surface); margin-bottom: 16px;">Monétisation B2B</h2>
-            <div style="text-align: center; margin: 40px 0;">
-                <div class="big-stat" style="color: var(--md-success);">€25-40K</div>
-                <p style="color: var(--md-on-surface-variant); margin-top: 8px;" class="title-medium">Objectif revenus</p>
+            <div class="step-indicator">
+                <span class="step-number">10</span>
+                <span class="step-label">Tarification Shops</span>
             </div>
-            <div class="card-grid">
-                <div class="md-card md-card-filled" style="text-align: center;">
-                    <span class="material-symbols-outlined" style="font-size: 32px; color: var(--md-primary); margin-bottom: 8px;">qr_code_2</span>
-                    <p class="body-medium" style="color: var(--md-on-surface-variant); margin-bottom: 8px;">Stickers</p>
-                    <p class="display-small" style="color: var(--md-primary);">€8-12K</p>
-                </div>
-                <div class="md-card" style="text-align: center; background: var(--md-primary); color: var(--md-on-primary);">
-                    <span class="material-symbols-outlined" style="font-size: 32px; margin-bottom: 8px;">store</span>
-                    <p class="body-medium" style="opacity: 0.8; margin-bottom: 8px;">Shops (20-35)</p>
-                    <p class="display-small">€15-25K</p>
-                </div>
-                <div class="md-card md-card-filled" style="text-align: center;">
-                    <span class="material-symbols-outlined" style="font-size: 32px; color: var(--md-primary); margin-bottom: 8px;">workspace_premium</span>
-                    <p class="body-medium" style="color: var(--md-on-surface-variant); margin-bottom: 8px;">Premium B2C</p>
-                    <p class="display-small" style="color: var(--md-primary);">€2-3K</p>
-                </div>
-            </div>
-            <p style="text-align: center; margin-top: 32px; color: var(--md-on-surface-variant); display: flex; align-items: center; justify-content: center; gap: 8px;" class="body-large">
-                <span class="material-symbols-outlined">add_circle</span>
-                Début des discussions avec les assurances
-            </p>
-        </div>
-    </section>
-
-    <!-- SLIDE 12: Phase 3 Vision -->
-    <section class="slide slide-secondary" data-chapter="Phases">
-        <div class="slide-content" style="text-align: center;">
-            <div class="slide-label">Phase 3 - Année 3+</div>
-            <h2 class="display-small" style="margin-bottom: 16px;">Vision Long Terme</h2>
-            <div class="big-number">€150K+</div>
-            <p class="headline-medium" style="opacity: 0.9;">Revenus annuels à maturité</p>
-            <div class="pie-container" style="margin-top: 40px; justify-content: center;">
-                <div class="pie-legend" style="text-align: left; max-width: 400px;">
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: var(--md-primary);"></div>
-                        <span class="legend-label">Abonnements Shops</span>
-                        <span class="legend-value">40%</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: var(--md-tertiary);"></div>
-                        <span class="legend-label">Stickers B2B</span>
-                        <span class="legend-value">17%</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: var(--md-tertiary);"></div>
-                        <span class="legend-label">Stickers B2C</span>
-                        <span class="legend-value">10%</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: var(--md-success);"></div>
-                        <span class="legend-label">Assurances</span>
-                        <span class="legend-value">20%</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: var(--md-secondary);"></div>
-                        <span class="legend-label">Stations + Premium</span>
-                        <span class="legend-value">13%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 13: Shop Pricing -->
-    <section class="slide slide-surface" data-chapter="Tarification">
-        <div class="slide-content">
-            <div class="slide-label" style="color: var(--md-primary);">Grille Tarifaire</div>
-            <h2 class="display-small" style="color: var(--md-on-surface); margin-bottom: 24px;">Abonnements Shops</h2>
+            <h2 class="display-small" style="margin-bottom: 24px;">Grille tarifaire B2B (Shops)</h2>
             <div class="pricing-grid">
                 <div class="pricing-card">
-                    <div class="pricing-name">STARTER</div>
+                    <div class="pricing-name">Starter</div>
                     <div class="pricing-price" style="color: var(--md-primary);">€19</div>
                     <div class="pricing-period">/mois</div>
                     <div class="pricing-features">
                         <div class="pricing-feature"><span class="material-symbols-outlined">check</span> Jusqu'à 50 skis</div>
-                        <div class="pricing-feature"><span class="material-symbols-outlined">check</span> Gestion locations basic</div>
+                        <div class="pricing-feature"><span class="material-symbols-outlined">check</span> Gestion locations</div>
                         <div class="pricing-feature"><span class="material-symbols-outlined">check</span> Support email</div>
                     </div>
                 </div>
                 <div class="pricing-card featured">
                     <div class="pricing-badge">Populaire</div>
-                    <div class="pricing-name">PRO</div>
+                    <div class="pricing-name">Pro</div>
                     <div class="pricing-price">€59</div>
                     <div class="pricing-period">/mois</div>
                     <div class="pricing-features">
                         <div class="pricing-feature"><span class="material-symbols-outlined">check</span> Jusqu'à 200 skis</div>
-                        <div class="pricing-feature"><span class="material-symbols-outlined">check</span> Gestion complète</div>
                         <div class="pricing-feature"><span class="material-symbols-outlined">check</span> Support prioritaire</div>
                         <div class="pricing-feature"><span class="material-symbols-outlined">check</span> 3 comptes staff</div>
                         <div class="pricing-feature"><span class="material-symbols-outlined">check</span> Analytics</div>
                     </div>
                 </div>
                 <div class="pricing-card">
-                    <div class="pricing-name">ENTERPRISE</div>
+                    <div class="pricing-name">Enterprise</div>
                     <div class="pricing-price" style="color: var(--md-primary);">€119</div>
                     <div class="pricing-period">/mois</div>
                     <div class="pricing-features">
                         <div class="pricing-feature"><span class="material-symbols-outlined">check</span> Skis illimités</div>
                         <div class="pricing-feature"><span class="material-symbols-outlined">check</span> Support dédié</div>
-                        <div class="pricing-feature"><span class="material-symbols-outlined">check</span> Staff illimité</div>
-                        <div class="pricing-feature"><span class="material-symbols-outlined">check</span> Accès API</div>
                         <div class="pricing-feature"><span class="material-symbols-outlined">check</span> Multi-locations</div>
+                        <div class="pricing-feature"><span class="material-symbols-outlined">check</span> API access</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SLIDE 14: ROI Pitch -->
-    <section class="slide slide-primary" data-chapter="Tarification">
-        <div class="slide-content" style="text-align: center;">
-            <div class="slide-label">Argument de Vente</div>
-            <h2 class="display-small" style="margin-bottom: 32px;">Le Pitch ROI</h2>
-            <div style="max-width: 800px; margin: 0 auto; padding: 40px; background: rgba(255,255,255,0.1); border-radius: 28px; border: 1px solid rgba(255,255,255,0.2);">
-                <span class="material-symbols-outlined" style="font-size: 48px; margin-bottom: 16px; opacity: 0.8;">format_quote</span>
-                <p class="headline-medium" style="line-height: 1.5;">Si vous récupérez seulement 2-3 paires de skis par saison, l'abonnement est rentabilisé.</p>
-            </div>
-            <div class="stats-row" style="margin-top: 48px;">
-                <div class="stat-item">
-                    <div class="stat-value" style="color: var(--md-error-container);">10+</div>
-                    <div class="stat-label">skis perdus/saison<br>(moyenne)</div>
-                </div>
-                <div class="stat-item">
-                    <span class="material-symbols-outlined" style="font-size: 48px; opacity: 0.6;">arrow_forward</span>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-value" style="color: var(--md-success-container);">3</div>
-                    <div class="stat-label">suffisent pour<br>rentabiliser</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 15: Year 1 Projection -->
-    <section class="slide slide-surface" data-chapter="Projections">
+    <!-- SLIDE 12: Sticker Pricing -->
+    <section class="slide slide-surface" data-chapter="Finances">
         <div class="slide-content">
-            <div class="slide-label" style="color: var(--md-primary);">Projection Année 1</div>
-            <h2 class="display-small" style="color: var(--md-on-surface); margin-bottom: 16px;">Revenus Mensuels</h2>
-            <div class="revenue-chart">
-                <div class="chart-bar">
-                    <div class="chart-bar-fill" style="height: 35px; background: var(--md-primary);"></div>
-                    <div class="chart-bar-label">Août</div>
-                    <div class="chart-bar-value">€200</div>
-                </div>
-                <div class="chart-bar">
-                    <div class="chart-bar-fill" style="height: 52px; background: var(--md-primary);"></div>
-                    <div class="chart-bar-label">Sept</div>
-                    <div class="chart-bar-value">€300</div>
-                </div>
-                <div class="chart-bar">
-                    <div class="chart-bar-fill" style="height: 84px; background: var(--md-primary);"></div>
-                    <div class="chart-bar-label">Oct</div>
-                    <div class="chart-bar-value">€480</div>
-                </div>
-                <div class="chart-bar">
-                    <div class="chart-bar-fill" style="height: 124px; background: var(--md-primary);"></div>
-                    <div class="chart-bar-label">Nov</div>
-                    <div class="chart-bar-value">€710</div>
-                </div>
-                <div class="chart-bar">
-                    <div class="chart-bar-fill" style="height: 200px; background: var(--md-success);"></div>
-                    <div class="chart-bar-label">Déc</div>
-                    <div class="chart-bar-value">€1,140</div>
-                </div>
-                <div class="chart-bar">
-                    <div class="chart-bar-fill" style="height: 178px; background: var(--md-primary);"></div>
-                    <div class="chart-bar-label">Jan</div>
-                    <div class="chart-bar-value">€1,020</div>
-                </div>
-                <div class="chart-bar">
-                    <div class="chart-bar-fill" style="height: 171px; background: var(--md-primary);"></div>
-                    <div class="chart-bar-label">Fév</div>
-                    <div class="chart-bar-value">€980</div>
-                </div>
-                <div class="chart-bar">
-                    <div class="chart-bar-fill" style="height: 148px; background: var(--md-primary);"></div>
-                    <div class="chart-bar-label">Mars</div>
-                    <div class="chart-bar-value">€850</div>
-                </div>
+            <div class="step-indicator">
+                <span class="step-number">11</span>
+                <span class="step-label">Tarification Stickers</span>
             </div>
-            <div style="text-align: center; margin-top: 32px; display: flex; align-items: center; justify-content: center; gap: 16px;">
-                <span class="material-symbols-outlined" style="color: var(--md-primary);">summarize</span>
-                <span class="title-medium" style="color: var(--md-on-surface-variant);">Total Année 1 (conservateur):</span>
-                <span class="display-small" style="color: var(--md-primary);">€5,680</span>
+            <h2 class="display-small" style="margin-bottom: 24px;">Prix des Stickers QR</h2>
+            <div class="two-col">
+                <div>
+                    <h3 class="title-large" style="margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
+                        <span class="material-symbols-outlined" style="color: var(--md-primary);">person</span> Particuliers (B2C)
+                    </h3>
+                    <div class="md-card md-card-elevated" style="margin-bottom: 12px;"><div style="display: flex; justify-content: space-between; align-items: center;"><div><div class="title-medium">Pack Standard (4)</div><div class="body-medium" style="color: var(--md-on-surface-variant);">€2.50/sticker</div></div><div class="headline-medium" style="color: var(--md-primary);">€10</div></div></div>
+                    <div class="md-card md-card-outlined" style="margin-bottom: 12px;"><div style="display: flex; justify-content: space-between; align-items: center;"><div><div class="title-medium">Pack Famille (8)</div><div class="body-medium" style="color: var(--md-on-surface-variant);">€2.25/sticker</div></div><div class="headline-medium" style="color: var(--md-primary);">€18</div></div></div>
+                    <div class="md-card md-card-outlined"><div style="display: flex; justify-content: space-between; align-items: center;"><div><div class="title-medium">Remplacement (2)</div><div class="body-medium" style="color: var(--md-on-surface-variant);">€3.00/sticker</div></div><div class="headline-medium" style="color: var(--md-primary);">€6</div></div></div>
+                </div>
+                <div>
+                    <h3 class="title-large" style="margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
+                        <span class="material-symbols-outlined" style="color: var(--md-secondary);">store</span> Professionnels (B2B)
+                    </h3>
+                    <div class="md-card md-card-elevated" style="margin-bottom: 12px;"><div style="display: flex; justify-content: space-between; align-items: center;"><div><div class="title-medium">Lot 50 stickers</div><div class="body-medium" style="color: var(--md-on-surface-variant);">€1.50/sticker</div></div><div class="headline-medium" style="color: var(--md-secondary);">€75</div></div></div>
+                    <div class="md-card md-card-outlined" style="margin-bottom: 12px;"><div style="display: flex; justify-content: space-between; align-items: center;"><div><div class="title-medium">Lot 100 stickers</div><div class="body-medium" style="color: var(--md-on-surface-variant);">€1.20/sticker</div></div><div class="headline-medium" style="color: var(--md-secondary);">€120</div></div></div>
+                    <div class="md-card md-card-outlined"><div style="display: flex; justify-content: space-between; align-items: center;"><div><div class="title-medium">Lot 250 stickers</div><div class="body-medium" style="color: var(--md-on-surface-variant);">€1.00/sticker</div></div><div class="headline-medium" style="color: var(--md-secondary);">€250</div></div></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- SLIDE 16: Break-Even -->
-    <section class="slide slide-primary" data-chapter="Projections">
-        <div class="slide-content" style="text-align: center;">
-            <div class="slide-label">Analyse</div>
-            <h2 class="display-small" style="margin-bottom: 32px;">Point de Rentabilité</h2>
-            <div class="card-grid">
-                <div class="md-card card-on-dark" style="text-align: center;">
-                    <span class="material-symbols-outlined" style="font-size: 32px; margin-bottom: 12px; opacity: 0.8;">payments</span>
-                    <p class="body-medium" style="opacity: 0.8; margin-bottom: 8px;">Coûts fixes annuels</p>
-                    <p class="display-small">€663</p>
-                    <p class="body-small" style="margin-top: 12px; opacity: 0.7;">Supabase + Vercel + Apple/Google</p>
-                </div>
-                <div class="md-card card-on-dark" style="text-align: center;">
-                    <span class="material-symbols-outlined" style="font-size: 32px; margin-bottom: 12px; opacity: 0.8;">person</span>
-                    <p class="body-medium" style="opacity: 0.8; margin-bottom: 8px;">Coût variable/user</p>
-                    <p class="display-small">€0.65</p>
-                    <p class="body-small" style="margin-top: 12px; opacity: 0.7;">Storage + DB + Support</p>
-                </div>
-                <div class="md-card card-on-dark" style="text-align: center;">
-                    <span class="material-symbols-outlined" style="font-size: 32px; margin-bottom: 12px; opacity: 0.8;">groups</span>
-                    <p class="body-medium" style="opacity: 0.8; margin-bottom: 8px;">Break-even @ €10/user</p>
-                    <p class="display-small">75</p>
-                    <p class="body-small" style="margin-top: 12px; opacity: 0.7;">utilisateurs payants</p>
-                </div>
-            </div>
-            <div style="margin-top: 48px; padding: 20px 32px; background: rgba(184, 243, 151, 0.2); border-radius: 16px; display: inline-flex; align-items: center; gap: 12px;">
-                <span class="material-symbols-outlined filled" style="color: var(--md-success-container);">verified</span>
-                <p class="title-large">Modèle économique très sain</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SLIDE 17: Key Metrics -->
-    <section class="slide slide-surface" data-chapter="KPIs">
+    <!-- SLIDE 13: Revenue Projections -->
+    <section class="slide slide-surface" data-chapter="Finances">
         <div class="slide-content">
-            <div class="slide-label" style="color: var(--md-primary);">À Surveiller</div>
-            <h2 class="display-small" style="color: var(--md-on-surface); margin-bottom: 32px;">Métriques Clés - Année 1</h2>
+            <div class="step-indicator">
+                <span class="step-number">12</span>
+                <span class="step-label">Projections An 1</span>
+            </div>
+            <h2 class="display-small" style="margin-bottom: 8px;">Revenus projetés — Année 1</h2>
+            <p class="body-large" style="opacity: 0.7; margin-bottom: 24px;">Scénario conservateur</p>
+            <div class="revenue-chart" style="background: rgba(255,255,255,0.08);">
+                <div class="chart-bar"><div class="chart-bar-fill" style="height: 25px; background: var(--md-primary);"></div><div class="chart-bar-label" style="color: rgba(255,255,255,0.6);">Sep</div><div class="chart-bar-value">€200</div></div>
+                <div class="chart-bar"><div class="chart-bar-fill" style="height: 40px; background: var(--md-primary);"></div><div class="chart-bar-label" style="color: rgba(255,255,255,0.6);">Oct</div><div class="chart-bar-value">€350</div></div>
+                <div class="chart-bar"><div class="chart-bar-fill" style="height: 70px; background: var(--md-primary);"></div><div class="chart-bar-label" style="color: rgba(255,255,255,0.6);">Nov</div><div class="chart-bar-value">€620</div></div>
+                <div class="chart-bar"><div class="chart-bar-fill" style="height: 130px; background: var(--md-success);"></div><div class="chart-bar-label" style="color: rgba(255,255,255,0.6);">Déc</div><div class="chart-bar-value">€1,150</div></div>
+                <div class="chart-bar"><div class="chart-bar-fill" style="height: 115px; background: var(--md-primary);"></div><div class="chart-bar-label" style="color: rgba(255,255,255,0.6);">Jan</div><div class="chart-bar-value">€1,020</div></div>
+                <div class="chart-bar"><div class="chart-bar-fill" style="height: 105px; background: var(--md-primary);"></div><div class="chart-bar-label" style="color: rgba(255,255,255,0.6);">Fév</div><div class="chart-bar-value">€930</div></div>
+                <div class="chart-bar"><div class="chart-bar-fill" style="height: 85px; background: var(--md-primary);"></div><div class="chart-bar-label" style="color: rgba(255,255,255,0.6);">Mars</div><div class="chart-bar-value">€750</div></div>
+                <div class="chart-bar"><div class="chart-bar-fill" style="height: 55px; background: var(--md-primary);"></div><div class="chart-bar-label" style="color: rgba(255,255,255,0.6);">Avr</div><div class="chart-bar-value">€480</div></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 32px; padding: 24px; background: rgba(255,255,255,0.08); border-radius: var(--md-shape-medium);">
+                <div><div class="label-medium" style="opacity: 0.6;">Total An 1</div><div class="headline-large" style="color: var(--md-primary-container);">€5 500 — €8 000</div></div>
+                <div style="display: flex; gap: 32px;"><div><div class="body-medium" style="opacity: 0.6;">Stickers</div><div class="title-medium">€3-4K</div></div><div><div class="body-medium" style="opacity: 0.6;">Shops</div><div class="title-medium">€1.5-3K</div></div><div><div class="body-medium" style="opacity: 0.6;">Autres</div><div class="title-medium">€0.5-1K</div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 14: Break-Even -->
+    <section class="slide slide-surface" data-chapter="Finances">
+        <div class="slide-content">
+            <div class="step-indicator">
+                <span class="step-number">13</span>
+                <span class="step-label">Rentabilité</span>
+            </div>
+            <h2 class="display-small" style="margin-bottom: 16px;">Quand sommes-nous rentables ?</h2>
+            <p class="body-large" style="color: var(--md-on-surface-variant); margin-bottom: 32px;">Analyse coûts vs revenus</p>
+            <div class="card-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="md-card md-card-elevated" style="text-align: center; padding: 28px;"><span class="material-symbols-outlined" style="font-size: 36px; color: var(--md-error); margin-bottom: 16px;">payments</span><div class="body-medium" style="color: var(--md-on-surface-variant); margin-bottom: 8px;">Coûts fixes/an</div><div class="medium-stat">€663</div><p class="body-medium" style="color: var(--md-on-surface-variant); margin-top: 12px; font-size: 0.8125rem;">Infra + App Stores</p></div>
+                <div class="md-card md-card-elevated" style="text-align: center; padding: 28px;"><span class="material-symbols-outlined" style="font-size: 36px; color: var(--md-secondary); margin-bottom: 16px;">person</span><div class="body-medium" style="color: var(--md-on-surface-variant); margin-bottom: 8px;">Coût/user actif</div><div class="medium-stat">€0.65</div><p class="body-medium" style="color: var(--md-on-surface-variant); margin-top: 12px; font-size: 0.8125rem;">Storage + DB</p></div>
+                <div class="md-card md-card-elevated" style="text-align: center; padding: 28px; border: 2px solid var(--md-success);"><span class="material-symbols-outlined" style="font-size: 36px; color: var(--md-success); margin-bottom: 16px;">flag</span><div class="body-medium" style="color: var(--md-on-surface-variant); margin-bottom: 8px;">Break-even</div><div class="medium-stat" style="color: var(--md-success);">75</div><p class="body-medium" style="color: var(--md-on-surface-variant); margin-top: 12px; font-size: 0.8125rem;">users payants @€10</p></div>
+            </div>
+            <div class="conclusion-box" style="margin-top: 32px;"><p class="title-large" style="color: var(--md-success); display: flex; align-items: center; justify-content: center; gap: 12px;"><span class="material-symbols-outlined filled">verified</span> Modèle très sain : marge > 80% après break-even</p></div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 7: ROADMAP - Plan d'exécution                        -->
+    <!-- ============================================================ -->
+
+    <!-- SLIDE 15: Year 1 Focus -->
+    <section class="slide slide-surface" data-chapter="Feuille de Route">
+        <div class="slide-content">
+            <div class="step-indicator">
+                <span class="step-number">14</span>
+                <span class="step-label">Plan An 1</span>
+            </div>
+            <h2 class="display-small" style="margin-bottom: 8px;">Année 1 : Prouver le concept</h2>
+            <p class="body-large" style="opacity: 0.85; margin-bottom: 28px;">Focus sur l'adoption et les premiers revenus</p>
+            <div class="two-col">
+                <div>
+                    <h3 class="title-large" style="margin-bottom: 16px; display: flex; align-items: center; gap: 10px;"><span class="material-symbols-outlined">flag</span> Objectifs</h3>
+                    <ul class="feature-list">
+                        <li><span class="material-symbols-outlined">group</span> <strong>1 000+</strong> utilisateurs</li>
+                        <li><span class="material-symbols-outlined">downhill_skiing</span> <strong>2 000+</strong> skis enregistrés</li>
+                        <li><span class="material-symbols-outlined">store</span> <strong>3-5</strong> shops payants</li>
+                        <li><span class="material-symbols-outlined">payments</span> <strong>€5-8K</strong> de revenus</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="title-large" style="margin-bottom: 16px; display: flex; align-items: center; gap: 10px;"><span class="material-symbols-outlined">tune</span> Stratégie prix</h3>
+                    <ul class="feature-list">
+                        <li><span class="material-symbols-outlined">person</span> Skieurs : <strong>GRATUIT</strong></li>
+                        <li><span class="material-symbols-outlined">qr_code_2</span> Stickers : <strong>€10/pack</strong></li>
+                        <li><span class="material-symbols-outlined">storefront</span> Shops Starter : <strong>GRATUIT</strong></li>
+                        <li><span class="material-symbols-outlined">business</span> Shops Pro : <strong>€39/mois</strong></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="logic-connector" style="background: rgba(255,255,255,0.1); border-left-color: rgba(255,255,255,0.4);"><span class="material-symbols-outlined">psychology</span><div><p class="body-large"><strong>Focus An 1 :</strong> Valider que les gens payent pour les stickers ET que les shops payent pour le SaaS.</p></div></div>
+        </div>
+    </section>
+
+    <!-- SLIDE 16: Year 2-3 Vision -->
+    <section class="slide slide-surface" data-chapter="Feuille de Route">
+        <div class="slide-content">
+            <div class="step-indicator">
+                <span class="step-number">15</span>
+                <span class="step-label">Vision An 2-3</span>
+            </div>
+            <h2 class="display-small" style="margin-bottom: 16px;">Années 2-3 : Scaler</h2>
+            <p class="body-large" style="color: var(--md-on-surface-variant); margin-bottom: 32px;">Une fois le concept prouvé, activer les leviers de croissance</p>
+            <div class="card-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="md-card md-card-elevated" style="text-align: center; padding: 24px;"><div class="label-medium" style="color: var(--md-on-surface-variant); margin-bottom: 8px;">Année 1</div><div class="medium-stat" style="color: var(--md-primary);">€5-8K</div><p class="body-medium" style="color: var(--md-on-surface-variant); margin-top: 12px;">Validation</p></div>
+                <div class="md-card md-card-elevated" style="text-align: center; padding: 24px;"><div class="label-medium" style="color: var(--md-on-surface-variant); margin-bottom: 8px;">Année 2</div><div class="medium-stat" style="color: var(--md-secondary);">€25-40K</div><p class="body-medium" style="color: var(--md-on-surface-variant); margin-top: 12px;">Croissance B2B</p></div>
+                <div class="md-card md-card-elevated" style="text-align: center; padding: 24px;"><div class="label-medium" style="color: var(--md-on-surface-variant); margin-bottom: 8px;">Année 3+</div><div class="medium-stat" style="color: var(--md-success);">€150K+</div><p class="body-medium" style="color: var(--md-on-surface-variant); margin-top: 12px;">Partenariats</p></div>
+            </div>
+            <h3 class="title-large" style="margin-top: 32px; margin-bottom: 16px;">Nouveaux leviers à activer</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                <div style="display: flex; align-items: center; gap: 12px; padding: 14px; background: var(--md-info-container); border-radius: var(--md-shape-medium);"><span class="material-symbols-outlined" style="color: var(--md-info);">security</span><div><div class="title-medium" style="color: var(--md-info);">Partenariats Assurances</div><p class="body-medium">€2-5/skieur couvert</p></div></div>
+                <div style="display: flex; align-items: center; gap: 12px; padding: 14px; background: var(--md-info-container); border-radius: var(--md-shape-medium);"><span class="material-symbols-outlined" style="color: var(--md-info);">landscape</span><div><div class="title-medium" style="color: var(--md-info);">Partenariats Stations</div><p class="body-medium">€500-2000/saison</p></div></div>
+                <div style="display: flex; align-items: center; gap: 12px; padding: 14px; background: var(--md-tertiary-container); border-radius: var(--md-shape-medium);"><span class="material-symbols-outlined" style="color: var(--md-tertiary);">workspace_premium</span><div><div class="title-medium" style="color: var(--md-tertiary);">Premium B2C</div><p class="body-medium">€12/an features avancées</p></div></div>
+                <div style="display: flex; align-items: center; gap: 12px; padding: 14px; background: var(--md-tertiary-container); border-radius: var(--md-shape-medium);"><span class="material-symbols-outlined" style="color: var(--md-tertiary);">public</span><div><div class="title-medium" style="color: var(--md-tertiary);">Expansion</div><p class="body-medium">Suisse, Autriche, Italie</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 8: MESURE DU SUCCÈS                                  -->
+    <!-- ============================================================ -->
+
+    <!-- SLIDE 17: KPIs -->
+    <section class="slide slide-surface" data-chapter="Mesure du Succès">
+        <div class="slide-content">
+            <div class="step-indicator">
+                <span class="step-number">16</span>
+                <span class="step-label">KPIs à suivre</span>
+            </div>
+            <h2 class="display-small" style="margin-bottom: 16px;">Comment savoir si ça marche ?</h2>
+            <p class="body-large" style="opacity: 0.7; margin-bottom: 32px;">6 métriques clés à surveiller en Année 1</p>
             <div style="max-width: 700px; margin: 0 auto;">
-                <div class="progress-item">
-                    <div class="progress-label">
-                        <span style="display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 20px; color: var(--md-primary);">group</span> Utilisateurs enregistrés</span>
-                        <span style="font-weight: 500;">1 000+</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 100%; background: var(--md-primary);"></div>
-                    </div>
-                </div>
-                <div class="progress-item">
-                    <div class="progress-label">
-                        <span style="display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 20px; color: var(--md-primary);">downhill_skiing</span> Skis enregistrés</span>
-                        <span style="font-weight: 500;">2 000+</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 100%; background: var(--md-primary);"></div>
-                    </div>
-                </div>
-                <div class="progress-item">
-                    <div class="progress-label">
-                        <span style="display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 20px; color: var(--md-success);">qr_code_2</span> Taux d'attachement stickers</span>
-                        <span style="font-weight: 500;">40%+</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 40%; background: var(--md-success);"></div>
-                    </div>
-                </div>
-                <div class="progress-item">
-                    <div class="progress-label">
-                        <span style="display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 20px; color: var(--md-tertiary);">shopping_cart</span> Conversion stickers</span>
-                        <span style="font-weight: 500;">30%+</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 30%; background: var(--md-tertiary);"></div>
-                    </div>
-                </div>
-                <div class="progress-item">
-                    <div class="progress-label">
-                        <span style="display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 20px; color: var(--md-secondary);">find_replace</span> Taux de récupération</span>
-                        <span style="font-weight: 500;">25%+</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 25%; background: var(--md-secondary);"></div>
-                    </div>
-                </div>
-                <div class="progress-item">
-                    <div class="progress-label">
-                        <span style="display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 20px; color: var(--md-secondary);">thumb_up</span> NPS Score</span>
-                        <span style="font-weight: 500;">40+</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 40%; background: var(--md-secondary);"></div>
-                    </div>
-                </div>
+                <div class="progress-item"><div class="progress-label" style="color: var(--md-on-surface);"><span style="display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 20px; color: var(--md-primary);">group</span> Utilisateurs enregistrés</span><span>1 000+</span></div><div class="progress-bar" style="background: var(--md-surface-variant);"><div class="progress-fill" style="width: 100%; background: var(--md-primary);"></div></div></div>
+                <div class="progress-item"><div class="progress-label" style="color: var(--md-on-surface);"><span style="display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 20px; color: var(--md-primary);">downhill_skiing</span> Skis enregistrés</span><span>2 000+</span></div><div class="progress-bar" style="background: var(--md-surface-variant);"><div class="progress-fill" style="width: 100%; background: var(--md-primary);"></div></div></div>
+                <div class="progress-item"><div class="progress-label" style="color: var(--md-on-surface);"><span style="display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 20px; color: var(--md-success);">shopping_cart</span> Taux conversion stickers</span><span>30%+</span></div><div class="progress-bar" style="background: var(--md-surface-variant);"><div class="progress-fill" style="width: 30%; background: var(--md-success);"></div></div></div>
+                <div class="progress-item"><div class="progress-label" style="color: var(--md-on-surface);"><span style="display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 20px; color: var(--md-secondary);">find_replace</span> Taux récupération</span><span>25%+</span></div><div class="progress-bar" style="background: var(--md-surface-variant);"><div class="progress-fill" style="width: 25%; background: var(--md-secondary);"></div></div></div>
+                <div class="progress-item"><div class="progress-label" style="color: var(--md-on-surface);"><span style="display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 20px; color: var(--md-tertiary);">store</span> Shops payants</span><span>3-5</span></div><div class="progress-bar" style="background: var(--md-surface-variant);"><div class="progress-fill" style="width: 40%; background: var(--md-tertiary);"></div></div></div>
+                <div class="progress-item"><div class="progress-label" style="color: var(--md-on-surface);"><span style="display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 20px; color: var(--md-info);">thumb_up</span> NPS Score</span><span>40+</span></div><div class="progress-bar" style="background: var(--md-surface-variant);"><div class="progress-fill" style="width: 40%; background: var(--md-info);"></div></div></div>
             </div>
         </div>
     </section>
 
-    <!-- SLIDE 18: Conclusion -->
-    <section class="slide slide-primary" data-chapter="Conclusion">
+    <!-- SLIDE 18: ROI Pitch -->
+    <section class="slide slide-surface" data-chapter="Mesure du Succès">
+        <div class="slide-content">
+            <div class="step-indicator">
+                <span class="step-number">17</span>
+                <span class="step-label">Argument B2B</span>
+            </div>
+            <h2 class="display-small" style="margin-bottom: 16px;">Le pitch ROI pour les shops</h2>
+            <p class="body-large" style="color: var(--md-on-surface-variant); margin-bottom: 32px;">Comment nous convainquons les magasins</p>
+            <div style="max-width: 700px; margin: 0 auto; padding: 32px; background: var(--md-primary-container); border-radius: var(--md-shape-large); text-align: center;">
+                <span class="material-symbols-outlined" style="font-size: 40px; color: var(--md-primary); margin-bottom: 16px;">format_quote</span>
+                <p class="headline-medium" style="color: var(--md-on-primary-container); line-height: 1.4;">"Si vous récupérez seulement <strong>2-3 paires de skis</strong> par saison, l'abonnement est <strong>rentabilisé</strong>."</p>
+            </div>
+            <div class="stats-row" style="margin-top: 40px;">
+                <div class="stat-item"><div class="stat-value" style="color: var(--md-error);">10+</div><div class="stat-label" style="color: var(--md-on-surface-variant);">skis perdus/saison<br>(moyenne shop)</div></div>
+                <div class="stat-item"><span class="material-symbols-outlined" style="font-size: 32px; color: var(--md-outline);">arrow_forward</span></div>
+                <div class="stat-item"><div class="stat-value" style="color: var(--md-success);">3</div><div class="stat-label" style="color: var(--md-on-surface-variant);">suffisent pour<br>rentabiliser</div></div>
+                <div class="stat-item"><span class="material-symbols-outlined" style="font-size: 32px; color: var(--md-outline);">arrow_forward</span></div>
+                <div class="stat-item"><div class="stat-value" style="color: var(--md-primary);">300%+</div><div class="stat-label" style="color: var(--md-on-surface-variant);">ROI potentiel</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 9: CONCLUSION                                        -->
+    <!-- ============================================================ -->
+
+    <!-- SLIDE 19: Summary -->
+    <section class="slide slide-surface" data-chapter="Conclusion">
         <div class="slide-content" style="text-align: center;">
-            <div class="slide-label">Résumé</div>
+            <div class="step-indicator">
+                <span class="step-number">✓</span>
+                <span class="step-label">Récapitulatif</span>
+            </div>
             <h2 class="display-small" style="margin-bottom: 32px;">La Stratégie Gagnante</h2>
             <div style="max-width: 900px; margin: 0 auto;">
-                <div style="display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;">
-                    <div style="flex: 1; min-width: 200px; padding: 24px; background: rgba(255,255,255,0.1); border-radius: 20px;">
-                        <div class="icon-container" style="background: rgba(255,255,255,0.15); margin: 0 auto 12px;">
-                            <span class="material-symbols-outlined">card_giftcard</span>
-                        </div>
-                        <p class="title-medium">B2C Gratuit</p>
-                        <p class="body-small" style="opacity: 0.7; margin-top: 4px;">Construire le réseau</p>
-                    </div>
-                    <div style="flex: 1; min-width: 200px; padding: 24px; background: rgba(255,255,255,0.1); border-radius: 20px;">
-                        <div class="icon-container" style="background: rgba(255,255,255,0.15); margin: 0 auto 12px;">
-                            <span class="material-symbols-outlined">qr_code_2</span>
-                        </div>
-                        <p class="title-medium">Stickers €10</p>
-                        <p class="body-small" style="opacity: 0.7; margin-top: 4px;">Revenus early-stage</p>
-                    </div>
-                    <div style="flex: 1; min-width: 200px; padding: 24px; background: rgba(255,255,255,0.1); border-radius: 20px;">
-                        <div class="icon-container" style="background: rgba(255,255,255,0.15); margin: 0 auto 12px;">
-                            <span class="material-symbols-outlined">apartment</span>
-                        </div>
-                        <p class="title-medium">SaaS B2B</p>
-                        <p class="body-small" style="opacity: 0.7; margin-top: 4px;">Croissance durable</p>
-                    </div>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px;">
+                    <div style="flex: 1; min-width: 200px; padding: 24px; background: rgba(255,255,255,0.15); border-radius: var(--md-shape-medium);"><span class="material-symbols-outlined" style="font-size: 32px; margin-bottom: 8px;">card_giftcard</span><p class="title-medium">App Gratuite</p><p class="body-medium" style="opacity: 0.8; margin-top: 4px;">→ Maximise le réseau</p></div>
+                    <div style="flex: 1; min-width: 200px; padding: 24px; background: rgba(255,255,255,0.15); border-radius: var(--md-shape-medium);"><span class="material-symbols-outlined" style="font-size: 32px; margin-bottom: 8px;">qr_code_2</span><p class="title-medium">Stickers €10</p><p class="body-medium" style="opacity: 0.8; margin-top: 4px;">→ 67% marge, cash flow</p></div>
+                    <div style="flex: 1; min-width: 200px; padding: 24px; background: rgba(255,255,255,0.15); border-radius: var(--md-shape-medium);"><span class="material-symbols-outlined" style="font-size: 32px; margin-bottom: 8px;">apartment</span><p class="title-medium">SaaS €19-119</p><p class="body-medium" style="opacity: 0.8; margin-top: 4px;">→ Revenus récurrents</p></div>
                 </div>
-                <div style="margin-top: 48px; padding: 24px 32px; background: rgba(184, 243, 151, 0.2); border-radius: 20px; border: 1px solid rgba(184, 243, 151, 0.3);">
-                    <p class="headline-medium" style="display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;">
-                        <span>An 1: €5-10K</span>
-                        <span class="material-symbols-outlined">arrow_forward</span>
-                        <span>An 2: €25-40K</span>
-                        <span class="material-symbols-outlined">arrow_forward</span>
-                        <span>An 3+: €150K+</span>
-                    </p>
-                </div>
+                <div style="padding: 24px 32px; background: rgba(255,255,255,0.2); border-radius: var(--md-shape-large); border: 2px solid rgba(255,255,255,0.4);"><p class="headline-medium" style="display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap;"><span>An 1: <strong>€5-8K</strong></span><span class="material-symbols-outlined">trending_up</span><span>An 2: <strong>€25-40K</strong></span><span class="material-symbols-outlined">trending_up</span><span>An 3+: <strong>€150K+</strong></span></p></div>
             </div>
-            <p style="margin-top: 48px; opacity: 0.8; display: flex; align-items: center; justify-content: center; gap: 8px;" class="title-large">
-                Prêts à lancer ? <span class="material-symbols-outlined filled">rocket_launch</span>
-            </p>
         </div>
     </section>
 
+    <!-- SLIDE 20: Discussion -->
+    <section class="slide slide-primary" data-chapter="Conclusion">
+        <div class="slide-content" style="text-align: center;">
+            <span class="material-symbols-outlined" style="font-size: 64px; margin-bottom: 24px; opacity: 0.8;">forum</span>
+            <h2 class="display-small" style="margin-bottom: 16px;">Discussion</h2>
+            <p class="headline-medium" style="opacity: 0.9; margin-bottom: 48px;">Questions ? Objections ? Idées ?</p>
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; max-width: 700px; margin: 0 auto;">
+                <div style="padding: 16px 24px; background: rgba(255,255,255,0.1); border-radius: 100px; display: flex; align-items: center; gap: 10px;"><span class="material-symbols-outlined">help_outline</span><span>Les prix sont-ils bons ?</span></div>
+                <div style="padding: 16px 24px; background: rgba(255,255,255,0.1); border-radius: 100px; display: flex; align-items: center; gap: 10px;"><span class="material-symbols-outlined">help_outline</span><span>Manque-t-il un modèle ?</span></div>
+                <div style="padding: 16px 24px; background: rgba(255,255,255,0.1); border-radius: 100px; display: flex; align-items: center; gap: 10px;"><span class="material-symbols-outlined">help_outline</span><span>Projections réalistes ?</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- JAVASCRIPT                                                   -->
+    <!-- ============================================================ -->
     <script>
-        // Configuration
+        // Chapter configuration with logical flow
         const chapters = [
-            { name: 'Introduction', slides: [1] },
-            { name: 'Le Défi', slides: [2] },
-            { name: 'Segments Clients', slides: [3, 4, 5] },
-            { name: 'Modèles Évalués', slides: [6, 7] },
-            { name: 'Stratégie Recommandée', slides: [8, 9] },
-            { name: 'Phases', slides: [10, 11, 12] },
-            { name: 'Tarification', slides: [13, 14] },
-            { name: 'Projections', slides: [15, 16] },
-            { name: 'KPIs', slides: [17] },
-            { name: 'Conclusion', slides: [18] }
+            { name: 'La Question', slides: [1, 2, 3] },
+            { name: 'Nos Contraintes', slides: [4] },
+            { name: 'Évaluation', slides: [5, 6] },
+            { name: 'Options Viables', slides: [7, 8] },
+            { name: 'Recommandation', slides: [9, 10] },
+            { name: 'Finances', slides: [11, 12, 13, 14] },
+            { name: 'Feuille de Route', slides: [15, 16] },
+            { name: 'Mesure du Succès', slides: [17, 18] },
+            { name: 'Conclusion', slides: [19, 20] }
         ];
 
-        // Model Data for Modal
+        // Model data for modal
         const modelData = {
-            A: {
-                title: 'Freemium B2C',
-                icon: 'card_membership',
-                iconClass: 'error',
-                description: 'Offrir un service de base gratuit avec des fonctionnalités premium payantes (€15/an). Les utilisateurs gratuits peuvent enregistrer 2 skis, les premium ont accès illimité, notifications prioritaires et partage familial.',
-                pros: [
-                    'Faible barrière à l\'adoption',
-                    'Construit le réseau rapidement',
-                    'Modèle standard de l\'industrie'
-                ],
-                cons: [
-                    'Taux de conversion typique très faible (2-5%)',
-                    'Besoin de 10 000+ utilisateurs pour revenus significatifs',
-                    'Les fonctionnalités premium sont des différenciateurs faibles'
-                ],
-                revenue: '€450/an',
-                verdict: 'not-recommended',
-                verdictText: 'Non viable seul',
-                verdictIcon: 'close'
-            },
-            B: {
-                title: 'Achat Unique',
-                icon: 'shopping_bag',
-                iconClass: 'warning',
-                description: 'Paiement unique de €10-15 pour un accès à vie avec toutes les fonctionnalités incluses. Pas d\'abonnement, enregistrement illimité de skis.',
-                pros: [
-                    'Simple, pas de fatigue d\'abonnement',
-                    'Correspond à la mentalité "acheter une fois"',
-                    'Meilleure conversion que l\'abonnement'
-                ],
-                cons: [
-                    'Pas de revenus récurrents',
-                    'Difficile de financer les opérations continues',
-                    'Impossible de faire de l\'upsell plus tard'
-                ],
-                revenue: '€6 000/an',
-                verdict: 'partial',
-                verdictText: 'Possible mais limité',
-                verdictIcon: 'warning'
-            },
-            C: {
-                title: 'Vente de Stickers',
-                icon: 'qr_code_2',
-                iconClass: 'success',
-                description: 'Application gratuite + vente de packs de stickers QR physiques. Pack de 4 stickers à €10 pour les particuliers, packs en gros pour les shops (€1.20/sticker pour 100 unités).',
-                pros: [
-                    'Résout le problème logistique des stickers',
-                    'Valeur tangible (produit physique)',
-                    'Upsell naturel (besoin de plus de stickers)',
-                    'Barrière face aux concurrents',
-                    'Marge nette de 67%'
-                ],
-                cons: [
-                    'Complexité logistique',
-                    'Gestion d\'inventaire nécessaire',
-                    'Les frais de livraison réduisent la marge'
-                ],
-                revenue: '€3 400/an',
-                verdict: 'recommended',
-                verdictText: 'Recommandé',
-                verdictIcon: 'check_circle'
-            },
-            D: {
-                title: 'SaaS B2B',
-                icon: 'business',
-                iconClass: 'success',
-                description: 'Abonnements mensuels pour les magasins de location : Starter (€19/mois, 50 skis), Pro (€59/mois, 200 skis), Enterprise (€119/mois, illimité). Inclut gestion des locations, analytics et support.',
-                pros: [
-                    'Revenus récurrents',
-                    'LTV élevée par client',
-                    'Modèle SaaS classique et scalable',
-                    'Ratio LTV:CAC de 4:1'
-                ],
-                cons: [
-                    'Cycle de vente plus long',
-                    'Nécessite de prouver le ROI aux shops',
-                    'Effort commercial requis'
-                ],
-                revenue: '€1 600 → €16 500/an',
-                verdict: 'recommended',
-                verdictText: 'Recommandé',
-                verdictIcon: 'check_circle'
-            },
-            E: {
-                title: 'Frais de Succès',
-                icon: 'paid',
-                iconClass: 'warning',
-                description: 'Service de base gratuit, frais de €25 uniquement lors d\'une récupération réussie de ski. Option de pourboire au trouveur.',
-                pros: [
-                    'Alignement parfait avec la valeur',
-                    'On paye seulement quand ça marche',
-                    'Facile à justifier'
-                ],
-                cons: [
-                    'Revenus imprévisibles',
-                    'Définition floue du "succès"',
-                    'Volume faible les premiers jours'
-                ],
-                revenue: '€375/an',
-                verdict: 'partial',
-                verdictText: 'Complément uniquement',
-                verdictIcon: 'info'
-            },
-            F: {
-                title: 'Partenariat Assurances',
-                icon: 'security',
-                iconClass: 'future',
-                description: 'Partenariat avec les assureurs équipement ski. MySkiFinder inclus gratuitement avec l\'assurance, l\'assureur paye €2-5 par skieur couvert. Réduction des sinistres finance le partenariat.',
-                pros: [
-                    'Distribution massive',
-                    'Acquisition utilisateur subventionnée',
-                    'Incitations alignées'
-                ],
-                cons: [
-                    'Cycle de vente de 12-24 mois',
-                    'Dépendance au partenaire',
-                    'Intégration complexe'
-                ],
-                revenue: '€30 000/an (An 2-3)',
-                verdict: 'future',
-                verdictText: 'Année 2-3',
-                verdictIcon: 'event'
-            },
-            G: {
-                title: 'Partenariat Stations',
-                icon: 'landscape',
-                iconClass: 'future',
-                description: 'Les stations payent pour la "couverture" (€500-2000/saison). MySkiFinder promu dans la station, intégration avec les objets trouvés de la station.',
-                pros: [
-                    'Contrats plus importants',
-                    'Positionnement stratégique',
-                    'Support marketing'
-                ],
-                cons: [
-                    'Cycle de vente très long',
-                    'Exigences personnalisées',
-                    'Parties prenantes complexes'
-                ],
-                revenue: '€3 000/an (An 2)',
-                verdict: 'future',
-                verdictText: 'Année 2-3',
-                verdictIcon: 'event'
-            }
+            A: { title: 'Freemium B2C', icon: 'card_membership', iconClass: 'error', description: 'Service gratuit avec premium à €15/an. Users gratuits: 2 skis max. Premium: illimité, notifications prioritaires.', pros: ['Faible barrière à l\'entrée', 'Construit le réseau', 'Modèle standard'], cons: ['Taux conversion 2-5% seulement', 'Besoin 10K+ users pour revenus significatifs', 'Features premium = différenciateurs faibles'], revenue: '€450/an', verdict: 'not-recommended', verdictText: 'Éliminé', verdictIcon: 'close' },
+            B: { title: 'Achat Unique', icon: 'shopping_bag', iconClass: 'warning', description: 'Paiement unique €10-15 pour accès à vie.', pros: ['Simple', 'Pas de fatigue abonnement', 'Bonne conversion'], cons: ['Pas de revenus récurrents', 'Difficile de planifier', 'Pas d\'upsell'], revenue: '€6 000/an', verdict: 'partial', verdictText: 'Limité', verdictIcon: 'warning' },
+            C: { title: 'Vente de Stickers', icon: 'qr_code_2', iconClass: 'success', description: 'App gratuite + packs stickers QR physiques. Pack 4 à €10, marge 67%.', pros: ['App reste gratuite', 'Valeur tangible', 'Marge 67%', 'Barrière concurrentielle'], cons: ['Logistique', 'Gestion inventaire'], revenue: '€3-4K/an', verdict: 'recommended', verdictText: 'Retenu', verdictIcon: 'check_circle' },
+            D: { title: 'SaaS B2B', icon: 'business', iconClass: 'success', description: 'Abonnements shops: Starter €19/m, Pro €59/m, Enterprise €119/m.', pros: ['Revenus récurrents', 'ROI facile à prouver', 'LTV:CAC 4:1', 'Scalable'], cons: ['Cycle vente plus long', 'Effort commercial'], revenue: '€1.5-3K/an', verdict: 'recommended', verdictText: 'Retenu', verdictIcon: 'check_circle' },
+            E: { title: 'Frais de Succès', icon: 'paid', iconClass: 'warning', description: 'Service gratuit, €25 lors récupération réussie.', pros: ['Alignement valeur', 'Facile à justifier'], cons: ['Revenus imprévisibles', 'Volume faible'], revenue: '€375/an', verdict: 'partial', verdictText: 'Complément', verdictIcon: 'info' },
+            F: { title: 'Partenariat Assurances', icon: 'security', iconClass: 'future', description: 'MySkiFinder inclus avec assurance, €2-5/skieur.', pros: ['Distribution massive', 'Acquisition subventionnée'], cons: ['Cycle 12-24 mois', 'Dépendance partenaire'], revenue: '€30K+ (An 2-3)', verdict: 'future', verdictText: 'An 2-3', verdictIcon: 'event' },
+            G: { title: 'Partenariat Stations', icon: 'landscape', iconClass: 'future', description: 'Stations payent €500-2000/saison pour couverture.', pros: ['Contrats importants', 'Positionnement'], cons: ['Cycle très long', 'Besoin prouver concept'], revenue: '€3K+ (An 2)', verdict: 'future', verdictText: 'An 2-3', verdictIcon: 'event' }
         };
 
-        // Modal Functions
+        // Modal functions
         function openModal(modelKey) {
             const model = modelData[modelKey];
-            const modal = document.getElementById('modelModal');
-            
-            // Update modal content
             document.getElementById('modalLabel').textContent = `MODÈLE ${modelKey}`;
             document.getElementById('modalTitle').textContent = model.title;
             document.getElementById('modalDescription').textContent = model.description;
             document.getElementById('modalRevenue').textContent = model.revenue;
-            
-            // Update icon
             const modalIcon = document.getElementById('modalIcon');
             modalIcon.className = `modal-icon ${model.iconClass}`;
             modalIcon.querySelector('.material-symbols-outlined').textContent = model.icon;
-            
-            // Update pros
-            const prosContainer = document.getElementById('modalPros');
-            prosContainer.innerHTML = model.pros.map(pro => `<li>${pro}</li>`).join('');
-            
-            // Update cons
-            const consContainer = document.getElementById('modalCons');
-            consContainer.innerHTML = model.cons.map(con => `<li>${con}</li>`).join('');
-            
-            // Update verdict
+            document.getElementById('modalPros').innerHTML = model.pros.map(p => `<li>${p}</li>`).join('');
+            document.getElementById('modalCons').innerHTML = model.cons.map(c => `<li>${c}</li>`).join('');
             const verdictContainer = document.getElementById('modalVerdict');
             verdictContainer.className = `modal-verdict ${model.verdict}`;
             document.getElementById('modalVerdictIcon').textContent = model.verdictIcon;
             document.getElementById('modalVerdictText').textContent = model.verdictText;
-            
-            // Show modal
-            modal.classList.add('active');
+            document.getElementById('modelModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
-            const modal = document.getElementById('modelModal');
-            modal.classList.remove('active');
+            document.getElementById('modelModal').classList.remove('active');
             document.body.style.overflow = '';
         }
 
-        // Add click listeners to model cards
+        // Event listeners for model cards
         document.querySelectorAll('.model-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const modelKey = card.dataset.model;
-                openModal(modelKey);
-            });
+            card.addEventListener('click', () => openModal(card.dataset.model));
         });
 
         // Close modal on overlay click
         document.getElementById('modelModal').addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal-overlay')) {
-                closeModal();
-            }
+            if (e.target.classList.contains('modal-overlay')) closeModal();
         });
 
-        // Close modal on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
-
-        // Get all slides
+        // Slide navigation
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
         document.getElementById('totalSlides').textContent = totalSlides;
 
-        // Generate navigation items
+        // Build navigation
         const navItems = document.getElementById('navItems');
-        chapters.forEach((chapter, index) => {
-            const item = document.createElement('a');
-            item.className = 'nav-item';
-            item.href = '#';
-            item.dataset.slideIndex = chapter.slides[0] - 1;
-            item.innerHTML = `<span class="nav-item-number">${index + 1}</span>${chapter.name}`;
-            item.addEventListener('click', (e) => {
-                e.preventDefault();
-                slides[chapter.slides[0] - 1].scrollIntoView({ behavior: 'smooth' });
+        chapters.forEach((chapter) => {
+            const sectionHeader = document.createElement('div');
+            sectionHeader.className = 'nav-section';
+            sectionHeader.textContent = chapter.name;
+            navItems.appendChild(sectionHeader);
+
+            chapter.slides.forEach((slideIndex) => {
+                const item = document.createElement('a');
+                item.className = 'nav-item';
+                item.href = '#';
+                item.dataset.slide = slideIndex;
+                const slideEl = slides[slideIndex - 1];
+                const stepEl = slideEl.querySelector('.step-number');
+                const stepNum = stepEl ? stepEl.textContent : slideIndex;
+                item.innerHTML = `<span class="nav-item-number">${stepNum}</span>Slide ${slideIndex}`;
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    slides[slideIndex - 1].scrollIntoView({ behavior: 'smooth' });
+                });
+                navItems.appendChild(item);
             });
-            navItems.appendChild(item);
         });
 
-        // Update current slide and active chapter
+        // Update current slide indicator
         function updateCurrentSlide() {
             const scrollPosition = window.scrollY;
             const windowHeight = window.innerHeight;
-            
             let currentSlideIndex = 0;
+
             slides.forEach((slide, index) => {
-                const slideTop = slide.offsetTop;
-                const slideBottom = slideTop + slide.offsetHeight;
-                
-                if (scrollPosition >= slideTop - windowHeight / 2) {
+                if (scrollPosition >= slide.offsetTop - windowHeight / 2) {
                     currentSlideIndex = index;
                 }
             });
 
-            // Update slide counter
             document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
 
-            // Update active navigation
-            const navLinks = document.querySelectorAll('.nav-item');
-            navLinks.forEach(link => link.classList.remove('active'));
-            
-            chapters.forEach((chapter, chapterIndex) => {
-                if (chapter.slides.includes(currentSlideIndex + 1)) {
-                    navLinks[chapterIndex].classList.add('active');
-                }
+            // Update nav items
+            document.querySelectorAll('.nav-item').forEach(link => {
+                const slideNum = parseInt(link.dataset.slide);
+                link.classList.toggle('active', slideNum === currentSlideIndex + 1);
             });
 
-            // Add active class to current slide
+            // Update slide active state
             slides.forEach((slide, index) => {
-                if (index === currentSlideIndex) {
-                    slide.classList.add('active');
-                } else {
-                    slide.classList.remove('active');
-                }
+                slide.classList.toggle('active', index === currentSlideIndex);
             });
         }
 
-        // Listen for scroll
         window.addEventListener('scroll', updateCurrentSlide);
-        
-        // Initial update
         updateCurrentSlide();
 
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
-            // Don't trigger slide navigation if modal is open
             if (document.getElementById('modelModal').classList.contains('active')) {
+                if (e.key === 'Escape') closeModal();
                 return;
             }
-            
+
             const currentSlide = parseInt(document.getElementById('currentSlide').textContent) - 1;
-            
-            if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+
+            if (['ArrowDown', 'PageDown', ' '].includes(e.key)) {
                 e.preventDefault();
                 if (currentSlide < totalSlides - 1) {
                     slides[currentSlide + 1].scrollIntoView({ behavior: 'smooth' });
                 }
-            } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+            } else if (['ArrowUp', 'PageUp'].includes(e.key)) {
                 e.preventDefault();
                 if (currentSlide > 0) {
                     slides[currentSlide - 1].scrollIntoView({ behavior: 'smooth' });
